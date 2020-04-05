@@ -2,7 +2,6 @@
 
 namespace App\Model;
 
-use App\Models\AppModel;
 
 class Permission extends AppModel
 {

@@ -22,4 +22,9 @@ class Event extends AppModel
     {
         return $this->belongsTo(Picture::class, 'main_picture_id');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'events_tags', 'event_id', 'tag_id');
+    }
 }

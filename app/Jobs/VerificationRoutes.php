@@ -31,12 +31,16 @@ class VerificationRoutes implements ShouldQueue
     {
         $routes = \Route::getRoutes();
         foreach ($routes as $route):
-            if(!Permission::query()->where('route', '=', $route->uri())->exists()):
-                Permission::create([
-                    'route' => $route->uri(),
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                ]);
+            $uri = '/'.$route->uri();
+            $middleware = $route->gatherMiddleware();
+            if (array_search('auth', $middleware) || array_search('auth:api', $middleware)):
+                if(!Permission::query()->where('route', '=', $uri)->exists()):
+                    Permission::create([
+                        'route' => $uri,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]);
+                endif;
             endif;
         endforeach;
     }

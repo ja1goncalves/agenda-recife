@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         $permissions = Permission::with('users')->get();
         foreach ($permissions as $permission):
             Gate::define($permission->route, function (User $user) use ($permission){
-                return !(array_search($user->id, array_column($permission->users, 'id')) === false);
+                return !(array_search($user->id, array_column($permission->users->toArray(), 'id')) === false);
             });
         endforeach;
     }

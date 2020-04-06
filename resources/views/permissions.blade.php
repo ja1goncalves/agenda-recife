@@ -50,7 +50,7 @@
                                             <th scope="col">{{ $permission->route }}</th>
                                             <th scope="col">
                                                 <a class="btn btn-{{$permission->inactive ? 'danger' : 'success'}}" href="{{ url('inativar-rota?id='.$permission->id) }}"
-                                                     title="{{ $permission->inactive ? 'Clique para reativar': 'Clique para bloquear' }}">
+                                                     title="{{ $permission->inactive ? 'Clique para reativar': 'Clique para bloquear' }}" style="padding: 0% 3%;">
                                                     <i class="fa fa-{{$permission->inactive ? 'close' : 'check'}}"></i>
                                                 </a>
                                             </th>

@@ -38,5 +38,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/permissoes', 'PermissionsController@index')->name('permissions');
     Route::get('/inativar-rota', 'PermissionsController@inactiveRoute')->name('inactive-route');
     Route::get('/update-routes', 'PermissionsController@updateRoutes')->name('update-routes');
+
+    //Categories
+    Route::get('/categorias', 'CategoriesController@index')->name('categories');
+    Route::post('/add-categorias', 'CategoriesController@create')->name('add-category');
 });
 

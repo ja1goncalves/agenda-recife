@@ -69,6 +69,9 @@
                                     <a class="dropdown-item text-white bg-dark" href="{{ route('categories') }}">
                                         <span><i class="fa fa-sliders"></i></span> {{ __('Categorias dos eventos') }}
                                     </a>
+                                    <a class="dropdown-item text-white bg-dark" href="{{ route('tags') }}">
+                                        <span>#</span> {{ __('Tags dos eventos') }}
+                                    </a>
                                     <a class="dropdown-item text-white bg-dark" href="{{ route('users') }}">
                                         <span><i class="fa fa-users"></i></span> {{ __('Usuários') }}
                                     </a>

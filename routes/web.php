@@ -42,5 +42,9 @@ Route::group(['middleware' => ['auth']], function() {
     //Categories
     Route::get('/categorias', 'CategoriesController@index')->name('categories');
     Route::post('/add-categorias', 'CategoriesController@create')->name('add-category');
+
+    //Tags
+    Route::get('/tags', 'TagsController@index')->name('tags');
+    Route::post('/add-tag', 'TagsController@create')->name('add-tag');
 });
 

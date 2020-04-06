@@ -5,6 +5,7 @@ namespace App\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -42,12 +43,21 @@ class User extends Authenticatable
         return $this->belongsToMany(Permission::class, 'users_permissions', 'user_id', 'permission_id');
     }
 
-    public function listAll($limit = 10)
+    public function listAll(array $filter, $limit = 10)
     {
+        $users = User::query();
+        if(isset($filter['name']))
+            $users = $users->where('name', 'like', "%{$filter['name']}%");
+
+        if(isset($filter['email']))
+            $users = $users->where('name', 'like', "%{$filter['email']}%");
+
         if(Auth::user()->id == 1):
-            return User::orderBy('name')->paginate($limit);
+            return $users->orderBy('created_at')
+                ->limit(isset($filter['limit']) ? $filter['limit'] : $limit )
+                ->paginate(isset($filter['page']) ? $filter['page'] : 1);
         else:
-            return User::where('id', '<>', 1)->orderBy('name')->paginate($limit);
+            return $users->where('id', '<>', 1)->orderBy('name')->paginate($limit);
         endif;
     }
 

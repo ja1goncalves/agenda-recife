@@ -72,6 +72,9 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdownConfiguration">
                                     <a class="dropdown-item text-white bg-dark" href="#">
+                                        <span><i class="fa fa-sliders"></i></span> {{ __('Categorias dos eventos') }}
+                                    </a>
+                                    <a class="dropdown-item text-white bg-dark" href="{{ route('users') }}">
                                         <span><i class="fa fa-users"></i></span> {{ __('Usuários') }}
                                     </a>
                                     <a class="dropdown-item text-white bg-dark" href="#">

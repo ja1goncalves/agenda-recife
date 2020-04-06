@@ -15,37 +15,30 @@ class EventsService extends AppService
     protected $model;
 
     /**
-     * @var Picture
-     */
-    protected $picture;
-
-    /**
      * Create a new controller instance.
      *
      * @param Event $model
-     * @param Picture $picture
      */
-    public function __construct(Event $model, Picture $picture)
+    public function __construct(Event $model)
     {
         $this->model = $model;
-        $this->picture = $picture;
     }
 
     public function all(array $data)
     {
         $filters = $this->filters($data);
         $events = $this->model->findWhere($filters)
-            ->limit($params['limit'] ?? 15)
+            ->limit($filters['limit'] ?? 15)
             ->orderBy('created_at', 'DESC')
             ->get();
 
         return [
             'events' => $events,
             'filter' => [
-                'name' => $params['name'] ?? '',
-                'artist' => $params['artist'] ?? '',
-                'location' => $params['location'] ?? '',
-                'when' => $params['when'] ?? '',
+                'name' => $filters['name'] ?? '',
+                'artist' => $filters['artist'] ?? '',
+                'location' => $filters['location'] ?? '',
+                'when' => $filters['when'] ?? '',
             ]
         ];
     }

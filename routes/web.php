@@ -26,8 +26,11 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/home', 'HomeController@index')->name('home');
 
-    //Eventos
+    //Events
     Route::get('/eventos', 'EventsController@index')->name('events');
     Route::post('/add-evento', 'EventsController@create')->name('add-event');
+
+    //Users
+    Route::get('/usuarios', 'UsersController@index')->name('users');
 });
 

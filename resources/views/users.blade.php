@@ -23,7 +23,7 @@
                                     </a>
                                 </div>
                                 <div class="col-md-2 col-sm-2 clearfix">
-                                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#create-event">Adicionar Usuário</a>
+                                    <a href="{{ route('register') }}" class="btn btn-success">Adicionar Usuário</a>
                                 </div>
                             </div>
                         </form>

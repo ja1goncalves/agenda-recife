@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateEventRequest;
 use App\Services\EventsService;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,12 @@ class EventsController extends Controller
     public function index(Request $request)
     {
         $data = $this->service->all($request->all(), $request->query());
-//        dd($data['events']->total());
+        return view('events')->with($data);
+    }
+
+    public function create(CreateEventRequest $request)
+    {
+        $data = $this->service->create($request->all());
         return view('events')->with($data);
     }
 }

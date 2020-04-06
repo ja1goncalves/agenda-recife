@@ -101,8 +101,16 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="row col-md-12" style="margin-bottom: 10px">
+                        @foreach ($errors->all() as $error)
+                            <li class="card bg-danger text-center" style="margin-right: 2px">{{ $error }}</li>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
             @yield('content')
         </main>
     </div>

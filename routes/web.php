@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     if(Auth::guest()){
         return Redirect::to('/login');
+    }else{
+        return Redirect::to('/home');
     }
 });
 
@@ -25,6 +27,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/home', 'HomeController@index')->name('home');
 
     //Eventos
-    Route::get('/eventos', 'EventsController@index')->name('events');
+    Route::get('/eventos/{filter?}', 'EventsController@index')->name('events');
+    Route::post('/add-evento', 'EventsController@create')->name('add-event');
 });
 

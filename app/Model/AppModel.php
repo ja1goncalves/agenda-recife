@@ -4,6 +4,7 @@
 namespace App\Model;
 
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -47,14 +48,20 @@ class AppModel extends Model
         return empty($select) ? $query->get($select) : $query;
     }
 
-    public function findWhere(array $wheres, $finish = false, $columns = [])
+    public function  findWhere(array $wheres, $finish = false, $columns = ['*'])
     {
         $query = self::query();
         foreach ($wheres as $key => $value):
             if (is_array($value) && count($value) >= 3):
                 $query->where($value[0], $value[1], $value[2]);
             else:
-                $query->where($key, '=', $value);
+                if (strtotime($value) !== false):
+                    $date_start = Carbon::createFromFormat('Y-m-d', $value)->format('Y-m-d 00:00:00');
+                    $date_end = Carbon::createFromFormat('Y-m-d', $value)->format('Y-m-d 23:59:59');
+                    $query->where($key, '>=', $date_start)->where($key, '<=', $date_end);
+                else:
+                    $query->where($key, '=', $value);
+                endif;
             endif;
         endforeach;
 

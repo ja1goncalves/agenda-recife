@@ -5,7 +5,7 @@ namespace App\Model;
 class Event extends AppModel
 {
     protected $fillable = [
-        'name', 'description', 'location', 'when', 'sale_link', 'indicated', 'featured'
+        'name', 'description', 'location', 'when', 'sale_link', 'indicated', 'featured', 'artist'
     ];
 
     public function categories()

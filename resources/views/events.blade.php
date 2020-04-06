@@ -49,7 +49,10 @@
                                 <div class="form-group col-md-6">
                                     <input type="text" name="name" class="form-control form-event" placeholder="Nome" required>
                                     <input type="text" name="location" class="form-control form-event" placeholder="Localização" required>
-                                    <input type="text" name="when" class="form-control form-event" placeholder="Data" required>
+                                    <div class="row col-md-12">
+                                        <input type="text" name="when" class="form-control col-md-6 form-event" placeholder="Data" required>
+                                        <input type="text" name="hour" class="form-control col-md-6 form-event" placeholder="Horário" required>
+                                    </div>
                                     <div class="custom-file form-event">
                                         <input type="file" name="main_picture" class="custom-file-input form-event" id="pictures">
                                         <label class="custom-file-label" for="pictures">Imagem principal</label>
@@ -108,14 +111,14 @@
                                     @foreach($events as $event)
                                         <tr>
                                             <th scope="col">{{ $event->name }}</th>
-                                            <th scope="col">{{ $event->when }}</th>
-                                            <th scope="col">{{ $event->artist }}</th>
+                                            <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->when)->format('d/m/Y H:i') }}</th>
+                                            <th scope="col">{{ $event->artist ?? 'Sem artista' }}</th>
                                             <th scope="col">{{ $event->location }}</th>
-                                            <th scope="col">{{ substr(0, 20, $event->description) }}</th>
+                                            <th scope="col">{{ $event->description }}</th>
                                             <th scope="col">{{ $event->sale_link }}</th>
                                             <th scope="col">
-                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $event->id }}"><i class="fas fa-pencil"></i></a>
-                                                <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $event->id }}"><i class="fas fa-trash"></i></a>
+                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $event->id }}"><i class="fa fa-pencil"></i></a>
+                                                <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $event->id }}"><i class="fa fa-trash"></i></a>
                                             </th>
                                         </tr>
                                     @endforeach

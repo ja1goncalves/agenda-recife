@@ -28,6 +28,7 @@ class CreateEventRequest extends FormRequest
             'artist'        => 'nullable|string|max:100',
             'location'      => 'required|string|max:150',
             'when'          => 'required|string|date_format:d/m/Y',
+            'hour'          => 'required|string',
             'end_at'        => 'nullable|string|date_format:d/m/Y',
             'indicated'     => 'nullable|string|max:2',
             'featured'      => 'nullable|string|max:2',

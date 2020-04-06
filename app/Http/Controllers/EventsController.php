@@ -29,13 +29,13 @@ class EventsController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->service->all($request->all(), $request->query());
+        $data = $this->service->all($request->all());
         return view('events')->with($data);
     }
 
     public function create(CreateEventRequest $request)
     {
         $data = $this->service->create($request->all());
-        return view('events')->with($data);
+        return redirect('eventos');
     }
 }

@@ -8,6 +8,8 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
+
 /**
  * Class AppService
  * @package App\Services
@@ -52,5 +54,23 @@ class AppService
             'message' => $message,
             'status' => $status
         ];
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    protected function filters(array $data)
+    {
+        $filter = [];
+        foreach ($data as $key => $item):
+            if (!empty($item) && !is_null($item)):
+                if (strtotime($item) !== false)
+                    $filter[$key] = Carbon::createFromFormat('d/m/Y', $item)->format('Y-m-d');
+                else
+                    $filter[$key] = $item;
+            endif;
+        endforeach;
+        return $filter;
     }
 }

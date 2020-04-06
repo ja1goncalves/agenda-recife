@@ -106,7 +106,7 @@
                 <div class="row justify-content-center">
                     <div class="row col-md-12" style="margin-bottom: 10px">
                         @foreach ($errors->all() as $error)
-                            <li class="card bg-danger text-center" style="margin-right: 2px">{{ $error }}</li>
+                            <li class="card bg-danger text-white text-center" style="margin-right: 2px">{{ $error }}</li>
                         @endforeach
                     </div>
                 </div>

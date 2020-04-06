@@ -57,7 +57,34 @@
                                             <th scope="col">
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $user->id }}"><i class="fa fa-pencil"></i></a>
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $user->id }}"><i class="fa fa-trash"></i></a>
-                                                <a href="#" title="Permissões" data-toggle="modal" data-target="#delete-{{ $user->id }}"><i class="fa fa-unlock"></i></a>
+                                                <a href="#" title="Permissões" data-toggle="modal" data-target="#permissions-{{ $user->id }}"><i class="fa fa-unlock"></i></a>
+                                                <div class="modal fade permissions-{{ $user->id }}" id="permissions-{{ $user->id }}">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="bg-dark text-white modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"><strong>Permissoões do usuário</strong></h5>
+                                                                <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <form method="POST" action="{{ route('add-event') }}" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="modal-body text-center col-md-12 row">
+                                                                    @foreach($user->permissions as $permission)
+                                                                    <div class="form-group col-md-4">
+                                                                        <div class="custom-control custom-checkbox text-left">
+                                                                            <input type="checkbox" name="indicated" {{$permission->inactive ? 'disabled' : ''}} class="custom-control-input" id="indicated-check-{{$permission->id}}" value="on">
+                                                                            <label class="custom-control-label" for="indicated-check-{{$permission->id}}"> {{$permission->route}}</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    @endforeach
+                                                            </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                                                                    <button class="btn btn-primary" type="submit">Salvar evento</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </th>
                                         </tr>
                                     @endforeach

@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function listAll(array $filter, $limit = 10)
     {
-        $users = User::query();
+        $users = User::query()->with('permissions');
         if(isset($filter['name']))
             $users = $users->where('name', 'like', "%{$filter['name']}%");
 

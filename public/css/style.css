@@ -1,0 +1,10 @@
+.vertical-line {
+    border-left: 1px solid white;
+    height: 35px;
+    margin-right: 15px;
+}
+
+.title-navbar {
+    font-family: 'Ubuntu Light',fantasy;
+    letter-spacing: -0.05rem;
+}

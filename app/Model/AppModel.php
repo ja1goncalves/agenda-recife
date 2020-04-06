@@ -11,7 +11,7 @@ class AppModel extends Model
 {
     use SoftDeletes;
 
-    public function lisAll($limit = 10, $order_by = 'created_at')
+    public function listAll($limit = 10, $order_by = 'created_at')
     {
         return self::query()->orderBy($order_by, 'DESC')->paginate($limit);
     }

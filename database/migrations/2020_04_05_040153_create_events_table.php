@@ -16,9 +16,11 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->text('description');
+            $table->string('artist', 100)->nullable();
+            $table->text('description')->nullable();
             $table->string('location', 150);
             $table->dateTime('when');
+            $table->dateTime('end_at')->nullable();
             $table->string('sale_link')->nullable();
             $table->boolean('indicated')->default(false);
             $table->boolean('featured')->default(false);

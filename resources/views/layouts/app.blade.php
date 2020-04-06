@@ -58,7 +58,7 @@
 {{--                            @endif--}}
                         @else
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('home') }}"><span><i class="fa fa-calendar"></i></span> {{ __('Eventos') }}</a>
+                                <a class="nav-link text-white" href="{{ route('events') }}"><span><i class="fa fa-calendar"></i></span> {{ __('Eventos') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="#"><span><i class="fa fa-line-chart"></i></span> {{ __('Publicidades') }}</a>

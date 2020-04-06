@@ -36,11 +36,13 @@ class UsersController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function create()
+    public function updatePermissions(Request $request)
     {
-        //
+        $this->service->updatePermissions($request->all());
+        return redirect('usuarios');
     }
 
     /**

@@ -43,9 +43,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Permission::class, 'users_permissions', 'user_id', 'permission_id');
     }
 
+    public function userPermissions()
+    {
+        return $this->hasMany(UserPermission::class, 'user_id', 'id');
+    }
+
     public function listAll(array $filter, $limit = 10)
     {
-        $users = User::query()->with('permissions');
+        $users = User::query()->with('userPermissions.permission');
         if(isset($filter['name']))
             $users = $users->where('name', 'like', "%{$filter['name']}%");
 

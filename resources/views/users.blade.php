@@ -56,8 +56,8 @@
                                             <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $user->created_at)->format('d/m/Y H:i') }}</th>
                                             <th scope="col">
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $user->id }}"><i class="fa fa-pencil"></i></a>
-                                                <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $user->id }}"><i class="fa fa-trash"></i></a>
-                                                <a href="#" title="Permissões" data-toggle="modal" data-target="#permissions-{{ $user->id }}"><i class="fa fa-unlock"></i></a>
+                                                <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $user->id }}"><i class="fa fa-trash text-danger"></i></a>
+                                                <a href="#" title="Permissões" data-toggle="modal" data-target="#permissions-{{ $user->id }}"><i class="fa fa-unlock text-white"></i></a>
                                                 <div class="modal fade permissions-{{ $user->id }}" id="permissions-{{ $user->id }}">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="bg-dark text-white modal-content">
@@ -65,21 +65,21 @@
                                                                 <h5 class="modal-title"><strong>Permissoões do usuário</strong></h5>
                                                                 <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
                                                             </div>
-                                                            <form method="POST" action="{{ route('add-event') }}" enctype="multipart/form-data">
+                                                            <form method="POST" action="{{ route('user-permission') }}" enctype="multipart/form-data">
                                                                 @csrf
                                                                 <div class="modal-body text-center col-md-12 row">
-                                                                    @foreach($user->permissions as $permission)
+                                                                    @foreach($user->userPermissions as $permission)
                                                                     <div class="form-group col-md-4">
                                                                         <div class="custom-control custom-checkbox text-left">
-                                                                            <input type="checkbox" name="indicated" {{$permission->inactive ? 'disabled' : ''}} class="custom-control-input" id="indicated-check-{{$permission->id}}" value="on">
-                                                                            <label class="custom-control-label" for="indicated-check-{{$permission->id}}"> {{$permission->route}}</label>
+                                                                            <input type="checkbox" name="permission-{{$permission->id}}" {{$permission->permission->inactive ? 'disabled' : ''}} class="custom-control-input" id="permission-check-{{$permission->id}}" {{$permission->auth ? 'checked' : ''}}>
+                                                                            <label class="custom-control-label" for="permission-check-{{$permission->id}}"> {{$permission->permission->route}}</label>
                                                                         </div>
                                                                     </div>
                                                                     @endforeach
                                                             </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-                                                                    <button class="btn btn-primary" type="submit">Salvar evento</button>
+                                                                    <button class="btn btn-primary" type="submit">Salvar permissões</button>
                                                                 </div>
                                                             </form>
                                                         </div>

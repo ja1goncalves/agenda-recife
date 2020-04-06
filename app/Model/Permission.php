@@ -15,4 +15,9 @@ class Permission extends AppModel
     {
         return $this->belongsToMany(User::class, 'users_permissions', 'permission_id', 'user_id');
     }
+
+    public function userPermission()
+    {
+        return $this->hasMany(UserPermission::class, 'permission_id', 'id');
+    }
 }

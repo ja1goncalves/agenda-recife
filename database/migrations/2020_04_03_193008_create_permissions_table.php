@@ -24,6 +24,7 @@ class CreatePermissionsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('permission_id');
             $table->unsignedBigInteger('user_id');
+            $table->boolean('auth')->default(false);
             $table->timestamps();
             $table->softDeletes();
 

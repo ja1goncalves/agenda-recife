@@ -72,7 +72,7 @@
                                     <a class="dropdown-item text-white bg-dark" href="{{ route('users') }}">
                                         <span><i class="fa fa-users"></i></span> {{ __('Usuários') }}
                                     </a>
-                                    <a class="dropdown-item text-white bg-dark" href="#">
+                                    <a class="dropdown-item text-white bg-dark" href="{{ route('permissions') }}">
                                         <span><i class="fa fa-unlock-alt"></i></span> {{ __('Permissões') }}
                                     </a>
                                 </div>

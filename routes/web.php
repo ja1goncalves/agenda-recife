@@ -33,5 +33,10 @@ Route::group(['middleware' => ['auth']], function() {
     //Users
     Route::get('/usuarios', 'UsersController@index')->name('users');
     Route::post('/permissoes-do-usuario', 'UsersController@updatePermissions')->name('user-permission');
+
+    //Permissions
+    Route::get('/permissoes', 'PermissionsController@index')->name('permissions');
+    Route::get('/inativar-rota', 'PermissionsController@inactiveRoute')->name('inactive-route');
+    Route::get('/update-routes', 'PermissionsController@updateRoutes')->name('update-routes');
 });
 

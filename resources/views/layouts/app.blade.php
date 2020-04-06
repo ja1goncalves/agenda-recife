@@ -57,16 +57,38 @@
 {{--                                </li>--}}
 {{--                            @endif--}}
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{ route('home') }}"><span><i class="fa fa-calendar"></i></span> {{ __('Eventos') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#"><span><i class="fa fa-line-chart"></i></span> {{ __('Publicidades') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#"><span><i class="fa fa-envelope"></i></span> {{ __('Contatos') }}</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdownConfiguration" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <span><i class="fa fa-gear"></i></span> {{ __('Configurações') }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdownConfiguration">
+                                    <a class="dropdown-item text-white bg-dark" href="#">
+                                        <span><i class="fa fa-users"></i></span> {{ __('Usuários') }}
+                                    </a>
+                                    <a class="dropdown-item text-white bg-dark" href="#">
+                                        <span><i class="fa fa-unlock-alt"></i></span> {{ __('Permissões') }}
+                                    </a>
+                                </div>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    <i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item text-danger bg-dark" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <span><i class="fa fa-power-off"></i></span> {{ __('Sair') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

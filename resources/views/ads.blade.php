@@ -9,15 +9,21 @@
                         <form method="get">
                             <div class="row col-sm-12">
                                 <div class="col-sm-2 date">
-                                    <input type="text" name="date" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="date" class="form-control datepicker"  placeholder="Data" value="{{ $filter['date'] }}">
+                                    <input type="text" name="start_at" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="start_at" class="form-control datepicker"  placeholder="Início" value="{{ $filter['start_at'] }}">
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Nome do evento" value="{{ $filter['name'] }}">
+                                <div class="col-sm-2 date">
+                                    <input type="text" name="end_at" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="end_at" class="form-control datepicker"  placeholder="Fim" value="{{ $filter['end_at'] }}">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Nome da publicidade" value="{{ $filter['name'] }}">
+                                </div>
+                                <div class="col-sm-2">
                                     <input type="text" name="link" class="form-control" placeholder="Link" value="{{ $filter['link'] }}">
                                 </div>
                                 <div class="col-md-2 text-center">

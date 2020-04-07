@@ -5,6 +5,7 @@ namespace App\Model;
 
 class Tag extends AppModel
 {
+    protected $table = 'tags';
     protected $fillable = [
         'name', 'searched_count', 'created_by', 'updated_by'
     ];

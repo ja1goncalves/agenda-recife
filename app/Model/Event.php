@@ -4,6 +4,7 @@ namespace App\Model;
 
 class Event extends AppModel
 {
+    protected $table = 'events';
     protected $fillable = [
         'name', 'description', 'location', 'when', 'sale_link', 'indicated', 'featured', 'artist'
     ];

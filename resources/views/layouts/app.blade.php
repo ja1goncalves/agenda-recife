@@ -131,11 +131,7 @@
             @yield('content')
         </main>
     </div>
-    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="{{ url('/js/vendor/jquery-2.2.4.min.js') }}"></script>
     <script src="{{ url('/js/popper.min.js') }}"></script>
-    <script src="{{ url('/js/bootstrap.min.js') }}"></script>
     <script src="{{ url('/js/owl.carousel.min.js') }}"></script>
     <script src="{{ url('/js/metisMenu.min.js') }}"></script>
     <script src="{{ url('/js/jquery.slimscroll.min.js') }}"></script>

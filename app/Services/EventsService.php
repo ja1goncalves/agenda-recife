@@ -73,7 +73,7 @@ class EventsService extends AppService
                 'name' => $filters['name'] ?? '',
                 'artist' => $filters['artist'] ?? '',
                 'location' => $filters['location'] ?? '',
-                'when' => $filters['when'] ?? '',
+                'when' => $data['when'] ?? '',
             ]
         ];
     }

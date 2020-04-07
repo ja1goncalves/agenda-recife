@@ -28,12 +28,6 @@ class AdsService extends AppService
     public function all($data = [])
     {
         $filters = $this->filters($data);
-
-        if (isset($filters['date'])):
-            $filters[] = ['start_at', '>=', $filters['date']];
-            $filters[] = ['end_at', '<=', $filters['date']];
-        endif;
-
         $ads = $this->model->findWhere($filters)
             ->limit($filters['limit'] ?? 15)
             ->orderBy('created_at', 'DESC')
@@ -44,7 +38,8 @@ class AdsService extends AppService
             'filter' => [
                 'name' => $filters['name'] ?? '',
                 'link' => $filters['link'] ?? '',
-                'date' => $filters['date'] ?? '',
+                'start_at' => $data['start_at'] ?? '',
+                'end_at' => $data['end_at'] ?? '',
             ]
         ];
     }

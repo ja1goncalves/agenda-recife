@@ -65,7 +65,7 @@ class AppService
         $filter = [];
         foreach ($data as $key => $item):
             if (!empty($item) && !is_null($item)):
-                if (strtotime($item) !== false)
+                if (Carbon::createFromFormat('d/m/Y', $item) !== false)
                     $filter[$key] = Carbon::createFromFormat('d/m/Y', $item)->format('Y-m-d');
                 else if (in_array($key, ['name', 'email', 'artist', 'location', 'link', 'sale_link', 'route']))
                     $filter[] = [$key, 'like', "%{$item}%"];

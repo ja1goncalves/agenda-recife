@@ -5,6 +5,8 @@ namespace App\Services;
 
 use App\Model\Category;
 use App\Model\Event;
+use App\Model\EventCategory;
+use App\Model\EventTag;
 use App\Model\Picture;
 use App\Model\Tag;
 use Carbon\Carbon;
@@ -27,17 +29,31 @@ class EventsService extends AppService
     protected $tag;
 
     /**
+     * @var EventCategory
+     */
+    protected $eventCategory;
+
+    /**
+     * @var EventTag
+     */
+    protected $eventTag;
+
+    /**
      * Create a new controller instance.
      *
      * @param Event $model
      * @param Category $category
+     * @param EventCategory $eventCategory
      * @param Tag $tag
+     * @param EventTag $eventTag
      */
-    public function __construct(Event $model, Category $category, Tag $tag)
+    public function __construct(Event $model, Category $category, EventCategory $eventCategory, Tag $tag, EventTag $eventTag)
     {
         $this->model = $model;
         $this->category = $category;
         $this->tag = $tag;
+        $this->eventCategory = $eventCategory;
+        $this->eventTag = $eventTag;
     }
 
     public function all(array $data)
@@ -73,7 +89,19 @@ class EventsService extends AppService
         $data['featured'] = isset($data['featured']);
 
         $event = $this->model->add($data);
-        dd($event);
+
+        if (isset($data['category'])):
+            foreach ($data['category'] as $id => $on):
+                $this->eventCategory->add(['event_id' => $event->id, 'category_id' => $id]);
+            endforeach;
+        endif;
+
+        if (isset($data['tag'])):
+            foreach ($data['tag'] as $id => $on):
+                $this->eventTag->add(['event_id' => $event->id, 'tag_id' => $id]);
+            endforeach;
+        endif;
+
         if (isset($data['main_picture'])):
             $picture = $this->model->pictures()->create([
                 'image' => base64_encode(file_get_contents($data['main_picture']->path())),

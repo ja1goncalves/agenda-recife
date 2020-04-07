@@ -63,8 +63,8 @@
                                         <div class="col-md-12 row">
                                         @foreach($categories as $category)
                                             <div class="custom-control custom-checkbox text-left" style="margin-right: 5px">
-                                                <input type="checkbox" name="category-{{$category->id}}" class="custom-control-input" id="category-{{$category->id}}">
-                                                <label class="custom-control-label" for="category-{{$category->id}}"> {{ $category->name }}</label>
+                                                <input type="checkbox" name="category[{{$category->id}}]" class="custom-control-input" id="category-{{$category->id}}">
+                                                <label class="custom-control-label" for="category-{{$category->id}}">{{ $category->name }}</label>
                                             </div>
                                         @endforeach
                                         </div>
@@ -90,8 +90,8 @@
                                         <div class="col-md-12 row">
                                         @foreach($tags as $tag)
                                             <div class="custom-control custom-checkbox text-left" style="margin-right: 5px">
-                                                <input type="checkbox" name="tag-{{$tag->id}}" class="custom-control-input" id="tag-{{$tag->id}}">
-                                                <label class="custom-control-label" for="tag-{{$tag->id}}"> {{ $tag->name }}</label>
+                                                <input type="checkbox" name="tag[{{$tag->id}}]" class="custom-control-input" id="tag-{{$tag->id}}">
+                                                <label class="custom-control-label" for="tag-{{$tag->id}}">{{ $tag->name }}</label>
                                             </div>
                                         @endforeach
                                         </div>

@@ -13,6 +13,16 @@ class Event extends AppModel
         return $this->belongsToMany(Category::class, 'events_categories', 'event_id', 'category_id');
     }
 
+    public function eventCategory()
+    {
+        return $this->hasMany(EventCategory::class, 'event_id', 'id');
+    }
+
+    public function eventTag()
+    {
+        return $this->hasMany(EventTag::class, 'event_id', 'id');
+    }
+
     public function pictures()
     {
         return $this->morphMany(Picture::class, 'imageable');

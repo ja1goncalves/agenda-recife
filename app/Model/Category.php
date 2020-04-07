@@ -15,4 +15,9 @@ class Category extends AppModel
     {
         return $this->$this->belongsToMany(Event::class, 'events_categories', 'category_id', 'event_id');
     }
+
+    public function eventCategory()
+    {
+        return $this->hasMany(EventCategory::class, 'category_id', 'id');
+    }
 }

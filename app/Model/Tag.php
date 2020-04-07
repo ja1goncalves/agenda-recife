@@ -13,4 +13,9 @@ class Tag extends AppModel
     {
         return $this->belongsToMany(Event::class, 'events_tags', 'tag_id', 'event_id');
     }
+
+    public function eventTag()
+    {
+        return $this->hasMany(EventTag::class, 'tag_id', 'id');
+    }
 }

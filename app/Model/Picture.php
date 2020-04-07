@@ -5,8 +5,9 @@ namespace App\Model;
 
 class Picture extends AppModel
 {
+    protected $table = 'pictures';
     protected $fillable = [
-        'image', 'imageable_id', 'imagable_type'
+        'image', 'title', 'mimetype', 'size', 'path', 'imageable_id', 'imageable_type'
     ];
 
     public function imageable()

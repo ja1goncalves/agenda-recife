@@ -30,7 +30,6 @@ class EventsController extends Controller
     public function index(Request $request)
     {
         $data = $this->service->all($request->all());
-//        dd($data);
         return view('events')->with($data);
     }
 

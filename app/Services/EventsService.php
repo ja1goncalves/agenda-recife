@@ -10,6 +10,7 @@ use App\Model\EventTag;
 use App\Model\Picture;
 use App\Model\Tag;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class EventsService extends AppService
 {
@@ -103,18 +104,26 @@ class EventsService extends AppService
         endif;
 
         if (isset($data['main_picture'])):
-            $picture = $this->model->pictures()->create([
+            $picture = $event->mainPicture()->create([
                 'image' => base64_encode(file_get_contents($data['main_picture']->path())),
-                'imageable_id' =>  $event->id,
-                'imageable_type' => Event::class
+                'title' => $data['main_picture']->getClientOriginalName(),
+                'mimetype' => $data['main_picture']->getMimeType(),
+                'size' => $data['main_picture']->getSize(),
+                'path' => $data['main_picture']->path(),
+                'imageable_type' => Event::class,
+                'imageable_id' => $event->id,
             ]);
-            $event = $this->model->edit($event->id, ['main_picture_id' => $picture->id]);
+            $this->model->edit($event->id, ['main_picture_id' => $picture->id]);
         endif;
 
         if (isset($data['pictures'])):
             foreach ($data['pictures'] as $picture):
-                $this->model->pictures()->create([
-                    'image' => $picture,
+                $event->pictures()->create([
+                    'image' => base64_encode(file_get_contents($picture->path())),
+                    'title' => $picture->getClientOriginalName(),
+                    'mimetype' => $picture->getMimeType(),
+                    'size' => $picture->getSize(),
+                    'path' => $picture->path(),
                     'imageable_id' =>  $event->id,
                     'imageable_type' => Event::class
                 ]);

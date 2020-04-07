@@ -35,7 +35,7 @@ class CreateEventRequest extends FormRequest
             'description'   => 'required|string',
             'sale_link'     => 'required|string|max:255',
             'main_pictures' => 'nullable|image',
-            'pictures'      => 'nullable|image'
+            'pictures'      => 'nullable'
         ];
     }
 

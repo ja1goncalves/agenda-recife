@@ -55,8 +55,8 @@
                                         <label class="custom-file-label text-left" for="main_picture">Imagem principal</label>
                                     </div>
                                     <div class="custom-file form-event">
-                                        <input type="file" name="pictures" class="custom-file-input form-event" id="pictures">
-                                        <label class="custom-file-label text-left" for="pictures">Imagens</label>
+                                        <input type="file" name="pictures[]" class="custom-file-input form-event" id="pictures" multiple>
+                                        <label class="custom-file-label text-left" for="pictures">Outras imagens</label>
                                     </div>
                                     <div class="text-left form-event" style="margin-top: 10px;">
                                         <label><strong>Categorias</strong></label>

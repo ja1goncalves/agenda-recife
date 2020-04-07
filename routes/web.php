@@ -46,5 +46,9 @@ Route::group(['middleware' => ['auth']], function() {
     //Tags
     Route::get('/tags', 'TagsController@index')->name('tags');
     Route::post('/add-tag', 'TagsController@create')->name('add-tag');
+
+    //Ads
+    Route::get('/publicidades', 'AdsController@index')->name('ads');
+    Route::post('/add-publicidades', 'AdsController@create')->name('add-ad');
 });
 

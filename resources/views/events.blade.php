@@ -118,7 +118,7 @@
                     <div class="card-body bg-dark text-white">
                         <div class="card text-light table-responsive">
                             <table class="table table-striped text-center">
-                                <thead class="bg-dark text-light text-uppercase">
+                                <thead class="bg-secondary text-light text-uppercase">
                                 <tr>
                                     <th scope="col">Nome</th>
                                     <th scope="col">Data</th>
@@ -140,7 +140,7 @@
                                             <th scope="col">{{ $event->sale_link }}</th>
                                             <th scope="col">
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $event->id }}"><i class="fa fa-pencil"></i></a>
-                                                <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $event->id }}"><i class="fa fa-trash"></i></a>
+                                                <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $event->id }}"><i class="fa fa-trash text-danger"></i></a>
                                             </th>
                                         </tr>
                                     @endforeach

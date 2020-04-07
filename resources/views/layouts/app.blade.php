@@ -56,7 +56,7 @@
                                 <a class="nav-link text-white" href="{{ route('events') }}"><span><i class="fa fa-calendar"></i></span> {{ __('Eventos') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="#"><span><i class="fa fa-line-chart"></i></span> {{ __('Publicidades') }}</a>
+                                <a class="nav-link text-white" href="{{ route('ads') }}"><span><i class="fa fa-line-chart"></i></span> {{ __('Publicidades') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="#"><span><i class="fa fa-envelope"></i></span> {{ __('Contatos') }}</a>
@@ -70,7 +70,7 @@
                                         <span><i class="fa fa-sliders"></i></span> {{ __('Categorias dos eventos') }}
                                     </a>
                                     <a class="dropdown-item text-white bg-dark" href="{{ route('tags') }}">
-                                        <span>#</span> {{ __('Tags dos eventos') }}
+                                        <span><i class="fa fa-tags"></i></span> {{ __('Tags dos eventos') }}
                                     </a>
                                     <a class="dropdown-item text-white bg-dark" href="{{ route('users') }}">
                                         <span><i class="fa fa-users"></i></span> {{ __('Usuários') }}

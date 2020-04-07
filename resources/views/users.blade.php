@@ -38,7 +38,7 @@
                     <div class="card-body bg-dark text-white">
                         <div class="card text-light table-responsive">
                             <table class="table table-striped text-center">
-                                <thead class="bg-dark text-light text-uppercase">
+                                <thead class="bg-secondary text-light text-uppercase">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nome</th>

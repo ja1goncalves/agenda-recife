@@ -16,7 +16,6 @@ class CreatePublicityTable extends Migration
         Schema::create('ads', function (Blueprint $table) {
             $table->id();
             $table->string('name', 150);
-            $table->binary('publicity')->nullable();
             $table->datetime('start_at');
             $table->datetime('end_at')->nullable();
             $table->string('link');

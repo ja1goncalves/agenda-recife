@@ -3,8 +3,10 @@
 
 namespace App\Services;
 
+use App\Model\Category;
 use App\Model\Event;
 use App\Model\Picture;
+use App\Model\Tag;
 use Carbon\Carbon;
 
 class EventsService extends AppService
@@ -15,13 +17,27 @@ class EventsService extends AppService
     protected $model;
 
     /**
+     * @var Category
+     */
+    protected $category;
+
+    /**
+     * @var Tag
+     */
+    protected $tag;
+
+    /**
      * Create a new controller instance.
      *
      * @param Event $model
+     * @param Category $category
+     * @param Tag $tag
      */
-    public function __construct(Event $model)
+    public function __construct(Event $model, Category $category, Tag $tag)
     {
         $this->model = $model;
+        $this->category = $category;
+        $this->tag = $tag;
     }
 
     public function all(array $data)
@@ -34,6 +50,8 @@ class EventsService extends AppService
 
         return [
             'events' => $events,
+            'categories' => $this->category->newQuery()->orderBy('name', 'desc')->get(),
+            'tags' => $this->tag->newQuery()->orderBy('name', 'desc')->get(),
             'filter' => [
                 'name' => $filters['name'] ?? '',
                 'artist' => $filters['artist'] ?? '',

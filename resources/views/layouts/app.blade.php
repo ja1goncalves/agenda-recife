@@ -20,6 +20,22 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ url('/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/metisMenu.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/slicknav.min.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script type="text/javascript">
+        var baseUrl = '{{ url('/') }}';
+    </script>
+    <link rel="stylesheet" href="{{ url('/css/typography.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/jquery-confirm.min.css') }}">
+    <script src="{{ url('/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css" rel="stylesheet"/>
+
 </head>
 <body>
     <div id="app">
@@ -59,7 +75,7 @@
                                 <a class="nav-link text-white" href="{{ route('ads') }}"><span><i class="fa fa-line-chart"></i></span> {{ __('Publicidades') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="#"><span><i class="fa fa-envelope"></i></span> {{ __('Contatos') }}</a>
+                                <a class="nav-link text-white" href="{{ route('reports') }}"><span><i class="fa fa-envelope"></i></span> {{ __('Contatos') }}</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdownConfiguration" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -115,5 +131,15 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ url('/js/vendor/jquery-2.2.4.min.js') }}"></script>
+    <script src="{{ url('/js/popper.min.js') }}"></script>
+    <script src="{{ url('/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url('/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url('/js/metisMenu.min.js') }}"></script>
+    <script src="{{ url('/js/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ url('/js/jquery.slicknav.min.js') }}"></script>
+    <script src="{{ url('/js/scripts.js') }}"></script>
 </body>
 </html>

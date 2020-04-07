@@ -337,7 +337,7 @@
     $('.phone').mask(SPMaskBehavior, spOptions);
 
     var dateFormat = "dd/mm/yy",
-        checkin = $( "#checkin" )
+        dateCalendar = $( ".date-calendar" )
         .datepicker({
             defaultDate: "+1w",
             changeMonth: false,
@@ -345,16 +345,16 @@
             dateFormat: dateFormat,
         })
         .on( "change", function() {
-            checkout.datepicker( "option", "minDate", getDate( this ) );
+            afterDateCalendar.datepicker( "option", "minDate", getDate( this ) );
         }),
-        checkout = $( "#checkout" ).datepicker({
+        afterDateCalendar = $( ".after-date-calendar" ).datepicker({
             defaultDate: "+1w",
             changeMonth: false,
             numberOfMonths: 1,
             dateFormat: dateFormat,
         })
         .on( "change", function() {
-        checkin.datepicker( "option", "maxDate", getDate( this ) );
+            dateCalendar.datepicker( "option", "maxDate", getDate( this ) );
         });
 
     function getDate( element ) {

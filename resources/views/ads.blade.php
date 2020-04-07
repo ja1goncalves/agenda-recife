@@ -8,8 +8,11 @@
                     <div class="card-body bg-secondary text-white">
                         <form method="get">
                             <div class="row col-sm-12">
-                                <div class="col-sm-2">
-                                    <input type="text" name="date" id="date" class="form-control"  placeholder="Data" value="{{ $filter['date'] }}">
+                                <div class="col-sm-2 date">
+                                    <input type="text" name="date" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="date" class="form-control datepicker"  placeholder="Data" value="{{ $filter['date'] }}">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <input type="text" name="name" class="form-control" id="name" placeholder="Nome do evento" value="{{ $filter['name'] }}">
@@ -43,17 +46,23 @@
                         <form method="POST" action="{{ route('add-ad') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body text-center col-md-12 row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-6 date">
                                     <input type="text" name="name" class="form-control form-event" placeholder="Nome" required>
-                                    <input type="date" name="start_at" data-date-format="dd/mm/yyyy" dataformatas="" id="start_at" class="form-control form-event" placeholder="Data de inicio" required>
+                                    <input type="text" data-provide="datepicker" data-date-format="dd/mm/yyyy" name="start_at" id="start_at" class="form-control form-event datepicker" placeholder="Data de inicio" required>
                                     <div class="custom-file form-event">
                                         <input type="file" name="publicity" class="custom-file-input form-event" id="publicity">
                                         <label class="custom-file-label text-left" for="publicity">Publicidade</label>
                                     </div>
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-6 date">
                                     <input type="text" name="link" class="form-control form-event" placeholder="Link" required>
-                                    <input type="date" name="end_at" class="form-control form-event" placeholder="Data do fim">
+                                    <input type="text" data-provide="datepicker" data-date-format="dd/mm/yyyy" name="end_at" class="form-control form-event datepicker" placeholder="Data do fim">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">

@@ -8,8 +8,11 @@
                     <div class="card-body bg-secondary text-white">
                         <form method="get">
                             <div class="row col-sm-12">
-                                <div class="col-sm-2">
-                                    <input type="text" name="when" id="when" class="form-control"  placeholder="Data do evento" value="{{ $filter['when'] }}">
+                                <div class="col-sm-2 date">
+                                    <input type="text" name="when" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="when" class="form-control datepicker" placeholder="Data do evento" value="{{ $filter['when'] }}">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" name="name" class="form-control" id="name" placeholder="Nome do evento" value="{{ $filter['name'] }}">

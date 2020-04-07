@@ -46,7 +46,6 @@ class AdsService extends AppService
 
     public function create(array $data)
     {
-//        dd($data);
         $picture = isset($data['publicity']) ? $data['publicity'] : null;
         unset($data['publicity']);
 
@@ -63,5 +62,10 @@ class AdsService extends AppService
                 'imageable_id' => $ad->id,
             ]);
         endif;
+    }
+
+    public function delete($id)
+    {
+        $this->model->remove($id);
     }
 }

@@ -53,6 +53,23 @@
                                             <th scope="col">
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $category->id }}"><i class="fa fa-pencil"></i></a>
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $category->id }}"><i class="fa fa-trash text-danger"></i></a>
+                                                <div class="modal fade delete-{{ $category->id }}" id="delete-{{ $category->id }}">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="bg-dark text-white modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"><strong>Você deseja realmente excluir essa categoria?</strong></h5>
+                                                                <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <form method="post" action="{{ route("del-category") }}">
+                                                                @csrf
+                                                                <input hidden name="id" type="text" value="{{$category->id}}">
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-danger" type="submit">Deletar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </th>
                                         </tr>
                                     @endforeach

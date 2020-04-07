@@ -38,4 +38,10 @@ class EventsController extends Controller
         $data = $this->service->create($request->all());
         return redirect('eventos');
     }
+
+    public function destroy(Request $request)
+    {
+        $this->service->delete($request->get('id'));
+        return redirect('eventos');
+    }
 }

@@ -144,6 +144,23 @@
                                             <th scope="col">
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $event->id }}"><i class="fa fa-pencil"></i></a>
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $event->id }}"><i class="fa fa-trash text-danger"></i></a>
+                                                <div class="modal fade delete-{{ $event->id }}" id="delete-{{ $event->id }}">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="bg-dark text-white modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"><strong>Você deseja realmente excluir esse evento?</strong></h5>
+                                                                <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <form method="post" action="{{ route("del-event") }}">
+                                                                @csrf
+                                                                <input hidden name="id" type="text" value="{{$event->id}}">
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-danger" type="submit">Deletar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </th>
                                         </tr>
                                     @endforeach

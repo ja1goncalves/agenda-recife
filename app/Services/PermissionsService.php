@@ -54,4 +54,9 @@ class PermissionsService extends AppService
         $permission = $this->model->getById($id);
         $this->model->edit($id, ['inactive' => !$permission->inactive]);
     }
+
+    public function delete($id)
+    {
+        $this->model->remove($id);
+    }
 }

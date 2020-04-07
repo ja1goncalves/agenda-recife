@@ -51,4 +51,9 @@ class UsersService extends AppService
             $this->permission->edit($user_permission->id, ['auth' => $permission == "on"]);
         endforeach;
     }
+
+    public function delete($id)
+    {
+        $this->model->remove($id);
+    }
 }

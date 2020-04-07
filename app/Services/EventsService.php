@@ -139,6 +139,10 @@ class EventsService extends AppService
                 'when' => $params['when'] ?? '',
             ]
         ];
+    }
 
+    public function delete($id)
+    {
+        $this->model->remove($id);
     }
 }

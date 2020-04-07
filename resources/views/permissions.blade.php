@@ -41,6 +41,7 @@
                                     <th scope="col">Rota</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Criado</th>
+                                    <th scope="col">Ações</th>
                                 </tr>
                                 </thead>
                                 <tbody class="bg-dark text-light">
@@ -55,6 +56,26 @@
                                                 </a>
                                             </th>
                                             <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $permission->created_at)->format('d/m/Y H:i') }}</th>
+                                            <th>
+                                                <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $permission->id }}"><i class="fa fa-trash text-danger"></i></a>
+                                                <div class="modal fade delete-{{ $permission->id }}" id="delete-{{ $permission->id }}">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="bg-dark text-white modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"><strong>Você deseja realmente excluir essa rota?</strong></h5>
+                                                                <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <form method="post" action="{{ route("del-route") }}">
+                                                                @csrf
+                                                                <input hidden name="id" type="text" value="{{$permission->id}}">
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-danger" type="submit">Deletar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </th>
                                         </tr>
                                     @endforeach
                                 </tbody>

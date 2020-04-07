@@ -37,4 +37,9 @@ class CategoriesService extends AppService
         $user_create = Auth::user();
         $this->model->add(['name' => $name, 'created_by' => $user_create->id, 'updated_by' => $user_create->id]);
     }
+
+    public function delete($id)
+    {
+        $this->model->remove($id);
+    }
 }

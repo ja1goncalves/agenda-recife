@@ -30,6 +30,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/eventos', 'EventsController@index')->name('events');
     Route::post('/add-evento', 'EventsController@create')->name('add-event');
     Route::post('/excluir-evento', 'EventsController@destroy')->name('del-event');
+    Route::get('/editar-evento', 'EventsController@edit')->name('edit-event');
+    Route::post('/editar-evento', 'EventsController@update')->name('update-event');
 
     //Users
     Route::get('/usuarios', 'UsersController@index')->name('users');

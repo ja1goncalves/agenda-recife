@@ -142,7 +142,7 @@
                                             <th scope="col">{{ $event->description }}</th>
                                             <th scope="col">{{ $event->sale_link }}</th>
                                             <th scope="col">
-                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $event->id }}"><i class="fa fa-pencil"></i></a>
+                                                <a href="{{ url('editar-evento?id='.$event->id) }}" title="Visualizar"><i class="fa fa-eye"></i></a>
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $event->id }}"><i class="fa fa-trash text-danger"></i></a>
                                                 <div class="modal fade delete-{{ $event->id }}" id="delete-{{ $event->id }}">
                                                     <div class="modal-dialog modal-lg">

@@ -74,7 +74,7 @@
                                                                     <input id="password-confirm"  type="password" name="password_confirmation" class="form-control form-event" placeholder="Confirmar senha" required autocomplete="new-password">
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button class="btn btn-success" type="submit">Editar</button>
+                                                                    <button class="btn btn-primary" type="submit">Editar</button>
                                                                 </div>
                                                             </form>
                                                             @else

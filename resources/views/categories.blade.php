@@ -68,7 +68,7 @@
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-                                                                    <button class="btn btn-success" type="submit">Editar</button>
+                                                                    <button class="btn btn-primary" type="submit">Editar</button>
                                                                 </div>
                                                             </form>
                                                         </div>

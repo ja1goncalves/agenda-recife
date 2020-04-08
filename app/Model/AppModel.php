@@ -31,17 +31,19 @@ class AppModel extends Model
 
     public function edit($id, array $data)
     {
-        $user = $this->getById($id);
+        $model = $this->getById($id);
         foreach($data as $key => $item):
-            $user->{$key} = $item;
+            if(in_array($key, $this->fillable))
+                $model->{$key} = $item;
         endforeach;
-        return $user->save();
+        $model->save();
+        return $model;
     }
 
     public function remove($id)
     {
-        $user = $this->getById($id);
-        return $user->delete();
+        $model = $this->getById($id);
+        return $model->delete();
     }
 
     public function findByField($field, $value, $order_by = 'created_at', $select = [])

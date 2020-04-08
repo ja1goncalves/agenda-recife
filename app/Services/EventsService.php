@@ -130,14 +130,62 @@ class EventsService extends AppService
             endforeach;
         endif;
 
+        return $event;
+    }
+
+    public function update(array $data, $id)
+    {
+        $event = $this->model->getById((int)$id);
+
+        $data['when'] = Carbon::createFromFormat('d/m/Y H:i', $data['when'].' '.$data['hour'])->format('Y-m-d H:i:s');
+        $data['indicated'] = isset($data['indicated']);
+        $data['featured'] = isset($data['featured']);
+
+        if (!is_null($data['end_at'])):
+            $data['end_at'] = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d H:m:s');
+        endif;
+        $event = $this->model->edit($event->id, $data);
+
+        $event->eventCategory()->delete();
+        if (isset($data['category'])):
+            foreach ($data['category'] as $id => $on):
+                $this->eventCategory->add(['event_id' => $event->id, 'category_id' => $id]);
+            endforeach;
+        endif;
+
+        $event->eventTag()->delete();
+        if (isset($data['tag'])):
+            foreach ($data['tag'] as $id => $on):
+                $this->eventTag->add(['event_id' => $event->id, 'tag_id' => $id]);
+            endforeach;
+        endif;
+
+        if (isset($data['main_picture'])):
+            $event->mainPicture()->delete();
+            $picture = Picture::saveByImageable($data['main_picture'], Event::class, $event->id);
+            $this->model->edit($event->id, ['main_picture_id' => $picture->id]);
+        endif;
+
+        if (isset($data['pictures'])):
+            $event->pictures()->delete();
+            foreach ($data['pictures'] as $picture):
+                Picture::saveByImageable($picture, Event::class, $event->id);
+            endforeach;
+        endif;
+
+        return $event;
+    }
+
+    public function find($id)
+    {
+        $event = $this->model->newQuery()->where('id', '=', $id)
+            ->with('pictures')->with('eventCategory')->with('eventTag')
+            ->with('mainPicture')->first();
+//        dd($event);
         return [
-            'events' => $this->model->listAll(),
-            'filter' => [
-                'name' => $params['name'] ?? '',
-                'artist' => $params['artist'] ?? '',
-                'location' => $params['location'] ?? '',
-                'when' => $params['when'] ?? '',
-            ]
+            'event' => $event,
+            'categories' => $this->category->newQuery()->orderBy('name', 'desc')->get(),
+            'tags' => $this->tag->newQuery()->orderBy('name', 'desc')->get(),
         ];
     }
 

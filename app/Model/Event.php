@@ -26,16 +26,16 @@ class Event extends AppModel
 
     public function pictures()
     {
-        return $this->morphMany(Picture::class, 'imageable');
+        return $this->morphMany(Picture::class, 'imageable', 'imageable_type', 'imageable_id', 'id');
     }
 
     public function mainPicture()
     {
-        return $this->belongsTo(Picture::class, 'main_picture_id');
+        return $this->hasOne(Picture::class, 'id', 'main_picture_id');
     }
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'events_tags', 'event_id', 'tag_id');
+        return $this->belongsToMany(Tag::class, 'events_tags', 'event_id', 'tag_id')->using(EventTag::class);
     }
 }

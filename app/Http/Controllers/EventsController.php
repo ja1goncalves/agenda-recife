@@ -35,8 +35,19 @@ class EventsController extends Controller
 
     public function create(CreateEventRequest $request)
     {
-        $data = $this->service->create($request->all());
-        return redirect('eventos');
+        $event = $this->service->create($request->all());
+        return redirect('editar-evento?id='. $event->id);
+    }
+
+    public function edit(Request $request)
+    {
+        return view('event-view')->with($this->service->find($request->get('id')));
+    }
+
+    public function update(CreateEventRequest $request)
+    {
+        $event = $this->service->update($request->all(), $request->get('id'));
+        return redirect('editar-evento?id='. $event->id);
     }
 
     public function destroy(Request $request)

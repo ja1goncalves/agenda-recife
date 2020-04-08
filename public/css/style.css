@@ -11,12 +11,12 @@
 
 .card-home {
     margin-bottom: 20px;
-    box-shadow: 5px 5px white;
+    box-shadow: 10px 10px black;
 }
 
 .card-filter {
     margin-bottom: 20px;
-    box-shadow: 5px 5px black;
+    box-shadow: 10px 10px black;
 }
 
 .form-event {

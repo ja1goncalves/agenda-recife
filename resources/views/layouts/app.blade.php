@@ -42,7 +42,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">
             <div class="container">
                 <div class="row logo">
-                    <a class="navbar-brand text-success align-middle title-navbar" href="{{ url('/') }}">
+                    <a class="navbar-brand text-success align-middle title-navbar" target="_blank" href="http://www.safari.com.br/">
                         <strong><i>safari</i></strong>
                     </a>
                     <div class="vertical-line"></div>

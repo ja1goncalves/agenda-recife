@@ -45,6 +45,6 @@ class ReportsService extends AppService
 
     public function create(array $data)
     {
-        $this->model->add($data);
+        return $this->model->add($data);
     }
 }

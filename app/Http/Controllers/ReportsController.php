@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateReportRequest;
 use App\Services\ReportsService;
 use Illuminate\Http\Request;
 
@@ -31,11 +32,13 @@ class ReportsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param CreateReportRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function create()
+    public function create(CreateReportRequest $request)
     {
-        //
+        $reports = $this->service->create($request->all());
+        return redirect('contatos');
     }
 
     /**

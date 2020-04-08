@@ -38,7 +38,7 @@ class UsersService extends AppService
     public function all(array $data)
     {
         return [
-            'users' => $this->model->listAll($data),
+            'users' => $this->model->listAll($data, isset($data['limit']) ? $data['limit'] : 10),
             'filter' => [
                 'name' => $data['name'] ?? '',
                 'email' => $data['email'] ?? '',

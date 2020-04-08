@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="card-body bg-dark text-white">
-                        <div class="card text-light table-responsive">
+                        <div class="card text-light table-responsive bg-secondary">
                             <table class="table table-striped text-center">
                                 <thead class="bg-secondary text-light text-uppercase">
                                 <tr>
@@ -97,6 +97,15 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @if($categories->total() > 0)
+                                <div class="card align-self-center bg-secondary {{ $categories->total() > $categories->perPage() ? 'bg-dark border-dark paginator' : ''}} ">
+                                    {!! $categories->render()!!}
+                                </div>
+                            @else
+                                <div class="card align-self-center bg-dark border-dark paginator">
+                                    <h5>Não há categorias</h5>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

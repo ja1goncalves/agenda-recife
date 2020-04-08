@@ -61,9 +61,8 @@ class EventsService extends AppService
     {
         $filters = $this->filters($data);
         $events = $this->model->findWhere($filters)
-            ->limit($filters['limit'] ?? 15)
             ->orderBy('created_at', 'DESC')
-            ->get();
+            ->paginate($filters['limit'] ?? 10);
 
         return [
             'events' => $events,

@@ -22,3 +22,22 @@
 .form-event {
     margin-bottom: 5px;
 }
+
+.paginator {
+    margin-bottom: 5px;
+    margin-top: -10px;
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+.page-link {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #343a40;
+}

@@ -28,7 +28,7 @@ class TagsService extends AppService
     public function all($data = [])
     {
         return [
-            'tags' => $this->model->listAll(isset($data['limit']) ? $data['limit'] : 15),
+            'tags' => $this->model->listAll(isset($data['limit']) ? $data['limit'] : 10),
         ];
     }
 

@@ -39,7 +39,7 @@
                 <div class="card card-home">
                     <div class="card-header bg-secondary text-light border-light"><strong style="font-size: 20px">Últimos contatos</strong></div>
                     <div class="card-body bg-dark text-white">
-                        <div class="card text-light table-responsive">
+                        <div class="card text-light table-responsive bg-secondary">
                             <table class="table table-striped text-center">
                                 <thead class="bg-secondary text-light text-uppercase">
                                 <tr>
@@ -67,6 +67,15 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @if($reports->total() > 0)
+                            <div class="card align-self-center {{ $reports->total() > $reports->perPage() ? 'bg-dark border-dark paginator' : ''}} ">
+                                {!! $reports->render()!!}
+                            </div>
+                            @else
+                            <div class="card align-self-center bg-dark border-dark paginator">
+                                <h5>Não há contatos</h5>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

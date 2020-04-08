@@ -28,9 +28,8 @@ class ReportsService extends AppService
     {
         $filters = $this->filters($data);
         $reports = $this->model->findWhere($filters)
-            ->limit($filters['limit'] ?? 15)
             ->orderBy('created_at', 'DESC')
-            ->get();
+            ->paginate($filters['limit'] ?? 15);
 
         return [
             'reports' => $reports,

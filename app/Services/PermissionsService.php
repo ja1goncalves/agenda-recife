@@ -35,14 +35,13 @@ class PermissionsService extends AppService
     public function all(array $data)
     {
         $permission = $this->model->newQuery()
-            ->orderBy(isset($data['order_by']) ? $data['order_by'] : 'id', 'DESC')
-            ->limit(isset($data['limit']) ? $data['limit'] : 15);
+            ->orderBy(isset($data['order_by']) ? $data['order_by'] : 'id', 'DESC');
 
         if(isset($data['route']))
             $permission->where('route', 'like', "%{$data['route']}%");
 
         return [
-            'permissions' => $permission->get(),
+            'permissions' => $permission->paginate(isset($data['limit']) ? $data['limit'] : 10),
             'filter' => [
                 'route' => $data['route'] ?? '',
             ]

@@ -36,7 +36,7 @@
                 <div class="card card-home">
                     <div class="card-header bg-secondary text-light border-light"><strong style="font-size: 20px">Usuários registrados</strong></div>
                     <div class="card-body bg-dark text-white">
-                        <div class="card text-light table-responsive">
+                        <div class="card text-light table-responsive bg-secondary">
                             <table class="table table-striped text-center">
                                 <thead class="bg-secondary text-light text-uppercase">
                                 <tr>
@@ -139,6 +139,15 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @if($users->total() > 0)
+                                <div class="card align-self-center bg-secondary {{ $users->total() > $users->perPage() ? 'bg-dark border-dark paginator' : ''}} ">
+                                    {!! $users->render()!!}
+                                </div>
+                            @else
+                                <div class="card align-self-center bg-dark border-dark paginator">
+                                    <h5>Não há usuários</h5>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

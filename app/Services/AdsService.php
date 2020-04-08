@@ -30,10 +30,9 @@ class AdsService extends AppService
         $filters = $this->filters($data);
         $ads = $this->model->findWhere($filters)
             ->with('picture')
-            ->limit($filters['limit'] ?? 15)
             ->orderBy('created_at', 'DESC')
-            ->get();
-//        dd($ads);
+            ->paginate($filters['limit'] ?? 10);
+
         return [
             'ads' => $ads,
             'filter' => [

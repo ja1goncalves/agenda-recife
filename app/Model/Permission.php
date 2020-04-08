@@ -6,7 +6,7 @@ namespace App\Model;
 class Permission extends AppModel
 {
     protected $fillable = [
-        'route', 'controller', 'description'
+        'route', 'controller', 'description', 'inactive'
     ];
 
     protected $table = 'permissions';

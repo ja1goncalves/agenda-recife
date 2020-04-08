@@ -109,7 +109,7 @@
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="bg-dark text-white modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title"><strong>Ediar publcidade</strong></h5>
+                                                                <h5 class="modal-title"><strong>Ediar publicidade</strong></h5>
                                                                 <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
                                                             </div>
                                                             <form method="POST" action="{{ route('edit-ad') }}" enctype="multipart/form-data">
@@ -139,7 +139,8 @@
                                                                 <div class="modal-body text-left">
                                                                     <label><strong>Publicidade</strong></label>
                                                                     <div>
-                                                                        <img style="width: 65%" src="data:image/png;base64, {{ $ad->picture->image }}" id="image" title="{{ $ad->picture->title }}" aria-label="Imagem da publicidade" alt="">
+                                                                        <a class="btn btn-danger trash-image position-absolute" title="Excluir imagem" href="{{ route('del-img', ['id' => $ad->picture->id, 'redirect' => 'publicidades']) }}"><i class="fa fa-trash"></i></a>
+                                                                        <img class="imageable" src="data:image/png;base64, {{ $ad->picture->image }}" id="image" title="{{ $ad->picture->title }}" aria-label="Imagem da publicidade" alt="">
                                                                     </div>
                                                                 </div>
                                                                 @endif

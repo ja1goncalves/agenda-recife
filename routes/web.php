@@ -66,5 +66,8 @@ Route::group(['middleware' => ['auth']], function() {
     //Reports
     Route::get('/contatos', 'ReportsController@index')->name('reports');
 //    Route::post('/add-contatos', 'AdsController@create')->name('add-report');
+
+    //Pictures
+    Route::get('/excluir-imagem', 'PicturesController@destroy')->name('del-img');
 });
 

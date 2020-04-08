@@ -103,12 +103,18 @@
                             @if (!is_null($event->main_picture) || count($event->pictures) != 0)
                             <div class="form-group modal-body text-left">
                                 <label><strong>Imagens</strong></label><br>
-                                <div class="row">
+                                <div class="row col-lg-12">
                                 @if(!is_null($event->main_picture))
-                                    <img style="width: 35%; margin-right: 2px; margin-top: 2px" src="data:image/png;base64, {{ $event->main_picture->image }}" id="image" title="{{ $event->main_picture->title }}" aria-label="Imagem da publicidade" alt="">
+                                    <div class="col-lg-6">
+                                        <a class="btn btn-danger trash-image position-absolute" title="Excluir imagem" href="{{ route('del-img', ['id' => $event->main_picture->id, 'redirect' => 'editar-evento?id='.$event->id]) }}"><i class="fa fa-trash"></i></a>
+                                        <img class="imageable" src="data:image/png;base64, {{ $event->main_picture->image }}" id="image" title="{{ $event->main_picture->title }}" aria-label="Imagem da publicidade" alt="">
+                                    </div>
                                 @endif
                                 @foreach($event->pictures as $picture)
-                                    <img style="width: 35%; margin-right: 2px; margin-top: 2px" src="data:image/png;base64, {{ $picture->image }}" id="image" title="{{ $picture->title }}" aria-label="Imagem da publicidade" alt="">
+                                    <div class="col-lg-4">
+                                        <a class="btn btn-danger trash-image position-absolute" title="Excluir imagem" href="{{ route('del-img', ['id' => $picture->id, 'redirect' => 'editar-evento?id='.$event->id]) }}"><i class="fa fa-trash"></i></a>
+                                        <img class="imageable" src="data:image/png;base64, {{ $picture->image }}" id="image" title="{{ $picture->title }}" aria-label="Imagem da publicidade" alt="">
+                                    </div>
                                 @endforeach
                                 </div>
                             </div>
@@ -118,7 +124,7 @@
                                 <textarea class="form-control" name="description" style="height: 100px;" id="description" aria-label="Descrição do evento" required>{{ $event->description }}</textarea>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" href="{{ route('events') }}">Voltar</button>
+                                <a type="button" class="btn btn-danger" href="{{ route('events') }}">Voltar</a>
                                 <button class="btn btn-primary" type="submit">Salvar evento</button>
                             </div>
                         </form>

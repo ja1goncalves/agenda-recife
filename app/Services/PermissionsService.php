@@ -51,7 +51,7 @@ class PermissionsService extends AppService
     public function inactiveRoute($id)
     {
         $permission = $this->model->getById($id);
-        $this->model->edit($id, ['inactive' => !$permission->inactive]);
+        $permission = $this->model->edit($id, ['inactive' => !$permission->inactive]);
     }
 
     public function delete($id)

@@ -74,11 +74,12 @@ class AdsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $this->service->update($request->all());
+        return  redirect('publicidades');
     }
 
     /**

@@ -25,8 +25,8 @@ class CreatePublicityRequest extends FormRequest
     {
         return [
             'name'      => 'required|string|max:150|unique:ads,name',
-            'start_at'  => 'required|date|date_format:Y-m-d',
-            'end_at'    => 'nullable|date|date_format:Y-m-d|after:start_date',
+            'start_at'  => 'required|string|date_format:d/m/Y',
+            'end_at'    => 'nullable|string|date_format:d/m/Y|after:start_date',
             'link'      => 'required|string|max:255|min:10',
             'publicity' => 'nullable|file'
         ];

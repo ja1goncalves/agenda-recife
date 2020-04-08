@@ -105,6 +105,52 @@
                                             <th scope="col">{{ $ad->link }}</th>
                                             <th scope="col">
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $ad->id }}"><i class="fa fa-pencil"></i></a>
+                                                <div class="modal fade edit-{{ $ad->id }}" id="edit-{{ $ad->id }}">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="bg-dark text-white modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"><strong>Ediar publcidade</strong></h5>
+                                                                <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <form method="POST" action="{{ route('edit-ad') }}" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="modal-body text-center col-md-12 row">
+                                                                    <div class="form-group col-md-6 date">
+                                                                        <input type="hidden" name="id" class="form-control form-event" placeholder="id" value="{{ $ad->id }}" required>
+                                                                        <input type="text" name="name" class="form-control form-event" placeholder="Nome" value="{{ $ad->name }}" required>
+                                                                        <input type="text" data-provide="datepicker" data-date-format="dd/mm/yyyy" name="start_at" id="start_at" class="form-control form-event datepicker" placeholder="Data de inicio" value="{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $ad->start_at)->format('d/m/Y') }}" required>
+                                                                        <div class="custom-file form-event">
+                                                                            <input type="file" name="publicity" class="custom-file-input form-event" id="publicity">
+                                                                            <label class="custom-file-label text-left" for="publicity">{{ is_null($ad->picture) ? 'Publicidade não adicionada' :  $ad->picture->title}}</label>
+                                                                        </div>
+                                                                        <div class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-th"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group col-md-6 date">
+                                                                        <input type="text" name="link" class="form-control form-event" placeholder="Link" value="{{ $ad->link }}" required>
+                                                                        <input type="text" data-provide="datepicker" data-date-format="dd/mm/yyyy" name="end_at" class="form-control form-event datepicker" value="{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $ad->end_at)->format('d/m/Y') }}"  placeholder="Data do fim">
+                                                                        <div class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-th"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                @if(!is_null($ad->picture))
+                                                                <div class="modal-body text-left">
+                                                                    <label><strong>Publicidade</strong></label>
+                                                                    <div>
+                                                                        <img style="width: 65%" src="data:image/png;base64, {{ $ad->picture->image }}" id="image" title="{{ $ad->picture->title }}" aria-label="Imagem da publicidade" alt="">
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                                                                    <button class="btn btn-primary" type="submit">Editar publicidade</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $ad->id }}"><i class="fa fa-trash text-danger"></i></a>
                                                 <div class="modal fade delete-{{ $ad->id }}" id="delete-{{ $ad->id }}">
                                                     <div class="modal-dialog modal-lg">

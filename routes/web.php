@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/publicidades', 'AdsController@index')->name('ads');
     Route::post('/add-publicidades', 'AdsController@create')->name('add-ad');
     Route::post('/excluir-ad', 'AdsController@destroy')->name('del-ad');
+    Route::post('/editar-ad', 'AdsController@update')->name('edit-ad');
 
     //Reports
     Route::get('/contatos', 'ReportsController@index')->name('reports');

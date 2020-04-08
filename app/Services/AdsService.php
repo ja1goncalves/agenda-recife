@@ -3,9 +3,9 @@
 
 namespace App\Services;
 
-
 use App\Model\Ad;
-use Illuminate\Support\Facades\Auth;
+use App\Model\Picture;
+use Carbon\Carbon;
 
 class AdsService extends AppService
 {
@@ -29,10 +29,11 @@ class AdsService extends AppService
     {
         $filters = $this->filters($data);
         $ads = $this->model->findWhere($filters)
+            ->with('picture')
             ->limit($filters['limit'] ?? 15)
             ->orderBy('created_at', 'DESC')
             ->get();
-
+//        dd($ads);
         return [
             'ads' => $ads,
             'filter' => [
@@ -49,18 +50,39 @@ class AdsService extends AppService
         $picture = isset($data['publicity']) ? $data['publicity'] : null;
         unset($data['publicity']);
 
+        $data['start_at'] = Carbon::createFromFormat('d/m/Y', $data['start_at'])->format('Y-m-d');
+        $data['end_at'] = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d');
+
         $ad = $this->model->add($data);
 
         if (!is_null($picture)):
-            $picture = $ad->picture()->create([
-                'image' => base64_encode(file_get_contents($picture->path())),
-                'title' => $picture->getClientOriginalName(),
-                'mimetype' => $picture->getMimeType(),
-                'size' =>$picture->getSize(),
-                'path' => $picture->path(),
-                'imageable_type' => Ad::class,
-                'imageable_id' => $ad->id,
-            ]);
+            $picture = Picture::saveByImageable($picture, Ad::class, $ad->id);
+        endif;
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function update(array $data)
+    {
+//        dd($data);
+        $ad = $this->model->getById((int)$data['id']);
+
+        if ($ad):
+            if (isset($data['publicity'])):
+                $ad->picture()->delete();
+                $picture = Picture::saveByImageable($data['publicity'], Ad::class, $ad->id);
+            endif;
+
+            $ad->name = isset($data['name']) ? $data['name'] : $ad->name;
+            $ad->start_at = Carbon::createFromFormat('d/m/Y', $data['start_at'])->format('Y-m-d');
+            $ad->end_at = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d');
+            $ad->link = isset($data['link']) ? $data['link'] : $ad->link;
+
+            return $ad->save();
+        else:
+            return false;
         endif;
     }
 
@@ -68,4 +90,5 @@ class AdsService extends AppService
     {
         $this->model->remove($id);
     }
+
 }

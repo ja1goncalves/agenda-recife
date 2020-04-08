@@ -52,6 +52,28 @@
                                             <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $category->created_at)->format('d/m/Y H:i') }}</th>
                                             <th scope="col">
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $category->id }}"><i class="fa fa-pencil"></i></a>
+                                                <div class="modal fade edit-{{ $category->id }}" id="edit-{{ $category->id }}">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="bg-dark text-white modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"><strong>Editar Categoria</strong></h5>
+                                                                <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <form method="POST" action="{{ route('edit-category') }}" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="modal-body text-center col-md-12">
+                                                                    <input type="hidden" id="id" name="id" class="form-control form-event" value="{{ $category->id }}" required>
+                                                                    <input type="text" id="name" name="name" class="form-control form-event" value="{{ $category->name }}" required>
+                                                                    <label for="name"></label>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                                                                    <button class="btn btn-success" type="submit">Editar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $category->id }}"><i class="fa fa-trash text-danger"></i></a>
                                                 <div class="modal fade delete-{{ $category->id }}" id="delete-{{ $category->id }}">
                                                     <div class="modal-dialog modal-lg">

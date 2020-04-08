@@ -38,6 +38,11 @@ class TagsService extends AppService
         $this->model->add(['name' => $name, 'created_by' => $user_create->id, 'updated_by' => $user_create->id]);
     }
 
+    public function update(string $name, $id)
+    {
+        return $this->model->edit($id, ['name' => $name]);
+    }
+
     public function delete($id)
     {
         $this->model->remove($id);

@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/usuarios', 'UsersController@index')->name('users');
     Route::post('/permissoes-do-usuario', 'UsersController@updatePermissions')->name('user-permission');
     Route::post('/excluir-usuario', 'UsersController@destroy')->name('del-user');
+    Route::post('/editar-usuario', 'UsersController@update')->name('edit-user');
 
     //Permissions
     Route::get('/permissoes', 'PermissionsController@index')->name('permissions');
@@ -46,11 +47,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/categorias', 'CategoriesController@index')->name('categories');
     Route::post('/add-categorias', 'CategoriesController@create')->name('add-category');
     Route::post('/excluir-categoria', 'CategoriesController@destroy')->name('del-category');
+    Route::post('/editar-categoria', 'CategoriesController@update')->name('edit-category');
 
     //Tags
     Route::get('/tags', 'TagsController@index')->name('tags');
     Route::post('/add-tag', 'TagsController@create')->name('add-tag');
     Route::post('/excluir-tag', 'TagsController@destroy')->name('del-tag');
+    Route::post('/editar-tag', 'TagsController@update')->name('edit-tag');
 
     //Ads
     Route::get('/publicidades', 'AdsController@index')->name('ads');

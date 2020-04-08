@@ -56,6 +56,38 @@
                                             <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $user->created_at)->format('d/m/Y H:i') }}</th>
                                             <th scope="col">
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $user->id }}"><i class="fa fa-pencil"></i></a>
+                                                <div class="modal fade edit-{{ $user->id }}" id="edit-{{ $user->id }}">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="bg-dark text-white modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"><strong>Edição</strong></h5>
+                                                                <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            @if(Auth::user()->id == $user->id || Auth::user()->id == 1)
+                                                            <form method="post" action="{{ route("edit-user") }}">
+                                                                @csrf
+                                                                <div class="modal-body text-center col-md-12">
+                                                                    <input type="text" name="name" class="form-control form-event" value="{{ $user->name }}" required>
+                                                                    <input type="text" name="email" class="form-control form-event" value="{{ $user->email }}" required>
+                                                                    <input id="password" type="password" name="password" class="form-control form-event" placeholder="Senha" required autocomplete="new-password">
+
+                                                                    <input id="password-confirm"  type="password" name="password_confirmation" class="form-control form-event" placeholder="Confirmar senha" required autocomplete="new-password">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-success" type="submit">Editar</button>
+                                                                </div>
+                                                            </form>
+                                                            @else
+                                                            <div class="modal-body text-center col-md-12">
+                                                                <h4>Você não tem permissão de alterar esse usuário</h4>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                                                            </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $user->id }}"><i class="fa fa-trash text-danger"></i></a>
                                                 <div class="modal fade delete-{{ $user->id }}" id="delete-{{ $user->id }}">
                                                     <div class="modal-dialog modal-lg">
@@ -93,7 +125,7 @@
                                                                         </div>
                                                                     </div>
                                                                     @endforeach
-                                                            </div>
+                                                                </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
                                                                     <button class="btn btn-primary" type="submit">Salvar permissões</button>

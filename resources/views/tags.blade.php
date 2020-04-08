@@ -52,6 +52,28 @@
                                             <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $tag->created_at)->format('d/m/Y H:i') }}</th>
                                             <th scope="col">
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $tag->id }}"><i class="fa fa-pencil"></i></a>
+                                                <div class="modal fade edit-{{ $tag->id }}" id="edit-{{ $tag->id }}">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="bg-dark text-white modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"><strong>Editar</strong></h5>
+                                                                <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <form method="POST" action="{{ route('edit-tag') }}" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="modal-body text-center col-md-12">
+                                                                    <input type="hidden" id="id" name="id" class="form-control form-event" value="{{ $tag->id }}" required>
+                                                                    <input type="text" id="name" name="name" class="form-control form-event" value="{{ $tag->name }}" required>
+                                                                    <label for="name"></label>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                                                                    <button class="btn btn-success" type="submit">Editar tag</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $tag->id }}"><i class="fa fa-trash text-danger"></i></a>
                                                 <div class="modal fade delete-{{ $tag->id }}" id="delete-{{ $tag->id }}">
                                                     <div class="modal-dialog modal-lg">

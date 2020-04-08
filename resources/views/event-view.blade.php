@@ -21,12 +21,12 @@
                                     <label for="name"><strong>Imagem principal</strong></label>
                                     <div class="custom-file form-event">
                                         <input type="file" name="main_picture" class="custom-file-input form-event" id="main_picture">
-                                        <label class="custom-file-label text-left" for="main_picture">{{ !is_null($event->main_picture) ? $event->main_picture->title : 'Adicione uma imagem principal' }}</label>
+                                        <label class="custom-file-label text-left" for="main_picture">{{ !is_null($event->mainPicture) ? $event->mainPicture->title : 'Adicione uma imagem principal' }}</label>
                                     </div>
                                     <label for="name"><strong>Outras imagens</strong></label>
                                     <div class="custom-file form-event">
                                         <input type="file" name="pictures[]" class="custom-file-input form-event" id="pictures" multiple>
-                                        <label class="custom-file-label text-left" for="pictures">{{ count($event->pictures) == 0 ? 'Adicione outras imagens' : "Há ".count($event->pictures)." imagens" }}</label>
+                                        <label class="custom-file-label text-left" for="pictures">{{ count($event->pictures) == 0 ? 'Adicione outras imagens' : (!is_null($event->mainPicture) ? (count($event->pictures) - 1)." imagens" : count($event->pictures)." imagens") }}</label>
                                     </div>
                                     <div class="text-left form-event" style="margin-top: 10px;">
                                         <label><strong>Categorias</strong></label>
@@ -100,21 +100,23 @@
                                     </div>
                                 </div>
                             </div>
-                            @if (!is_null($event->main_picture) || count($event->pictures) != 0)
+                            @if (!is_null($event->mainPicture) || count($event->pictures) != 0)
                             <div class="form-group modal-body text-left">
                                 <label><strong>Imagens</strong></label><br>
                                 <div class="row col-lg-12">
-                                @if(!is_null($event->main_picture))
-                                    <div class="col-lg-6">
-                                        <a class="btn btn-danger trash-image position-absolute" title="Excluir imagem" href="{{ route('del-img', ['id' => $event->main_picture->id, 'redirect' => 'editar-evento?id='.$event->id]) }}"><i class="fa fa-trash"></i></a>
-                                        <img class="imageable" src="data:image/png;base64, {{ $event->main_picture->image }}" id="image" title="{{ $event->main_picture->title }}" aria-label="Imagem da publicidade" alt="">
+                                @if(!is_null($event->mainPicture))
+                                    <div class="col-lg-4">
+                                        <a class="btn btn-danger trash-image position-absolute" title="Excluir imagem" href="{{ route('del-img', ['id' => $event->mainPicture->id, 'redirect' => 'editar-evento?id='.$event->id]) }}"><i class="fa fa-trash"></i></a>
+                                        <img class="imageable-main" src="data:image/png;base64, {{ $event->mainPicture->image }}" title="{{ $event->mainPicture->title }}" aria-label="Imagem principal do evento" alt="">
                                     </div>
                                 @endif
                                 @foreach($event->pictures as $picture)
+                                    @if($picture->id != $event->mainPicture->id)
                                     <div class="col-lg-4">
                                         <a class="btn btn-danger trash-image position-absolute" title="Excluir imagem" href="{{ route('del-img', ['id' => $picture->id, 'redirect' => 'editar-evento?id='.$event->id]) }}"><i class="fa fa-trash"></i></a>
-                                        <img class="imageable" src="data:image/png;base64, {{ $picture->image }}" id="image" title="{{ $picture->title }}" aria-label="Imagem da publicidade" alt="">
+                                        <img class="imageable" src="data:image/png;base64, {{ $picture->image }}" title="{{ $picture->title }}" aria-label="Imagem do evento" alt="">
                                     </div>
+                                    @endif
                                 @endforeach
                                 </div>
                             </div>

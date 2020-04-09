@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-home">
-                    <div class="card-header bg-secondary text-light border-light">
+                    <div class="card-header">
                         <strong style="font-size: 20px">Tags de eventos</strong>
 
                         <div class="float-right">
@@ -13,7 +13,7 @@
                         </div>
                         <div class="modal fade create-tag" id="create-tag">
                             <div class="modal-dialog modal-lg">
-                                <div class="bg-dark text-white modal-content">
+                                <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title"><strong>Cadastre uma nova tag de evento</strong></h5>
                                         <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
@@ -33,10 +33,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body bg-dark text-white">
-                        <div class="card text-light table-responsive bg-secondary">
+                    <div class="card-body">
+                        <div class="card table-responsive">
                             <table class="table table-striped text-center">
-                                <thead class="bg-secondary text-light text-uppercase">
+                                <thead class=" text-uppercase">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nome</th>
@@ -44,14 +44,14 @@
                                     <th scope="col">AÇÕES</th>
                                 </tr>
                                 </thead>
-                                <tbody class="bg-dark text-light">
+                                <tbody>
                                     @foreach($tags as $tag)
                                         <tr>
                                             <th scope="col">{{ $tag->id }}</th>
                                             <th scope="col">{{ $tag->name }}</th>
                                             <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $tag->created_at)->format('d/m/Y H:i') }}</th>
                                             <th scope="col">
-                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $tag->id }}"><i class="fa fa-pencil"></i></a>
+                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $tag->id }}"><i class="fa fa-pen"></i></a>
                                                 <div class="modal fade edit-{{ $tag->id }}" id="edit-{{ $tag->id }}">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="bg-dark text-white modal-content">
@@ -98,11 +98,11 @@
                                 </tbody>
                             </table>
                             @if($tags->total() > 0)
-                                <div class="card align-self-center bg-secondary {{ $tags->total() > $tags->perPage() ? 'bg-dark border-dark paginator' : ''}} ">
+                                <div class="card align-self-center {{ $tags->total() > $tags->perPage() ? ' paginator' : ''}} ">
                                     {!! $tags->render()!!}
                                 </div>
                             @else
-                                <div class="card align-self-center bg-dark border-dark paginator">
+                                <div class="card align-self-center paginator">
                                     <h5>Não há tags</h5>
                                 </div>
                             @endif

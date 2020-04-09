@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-filter">
-                    <div class="card-body bg-secondary text-white">
+                    <div class="card-body">
                         <form method="get">
                             <div class="row col-sm-12">
                                 <div class="col-sm-4">
@@ -34,11 +34,11 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-home">
-                    <div class="card-header bg-secondary text-light border-light"><strong style="font-size: 20px">Usuários registrados</strong></div>
-                    <div class="card-body bg-dark text-white">
-                        <div class="card text-light table-responsive bg-secondary">
+                    <div class="card-header"><strong style="font-size: 20px">Usuários registrados</strong></div>
+                    <div class="card-body">
+                        <div class="card table-responsive">
                             <table class="table table-striped text-center">
-                                <thead class="bg-secondary text-light text-uppercase">
+                                <thead class="text-uppercase">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nome</th>
@@ -47,7 +47,7 @@
                                     <th scope="col">Ações</th>
                                 </tr>
                                 </thead>
-                                <tbody class="bg-dark text-light">
+                                <tbody>
                                     @foreach($users as $user)
                                         <tr>
                                             <th scope="col">{{ $user->id }}</th>
@@ -55,7 +55,7 @@
                                             <th scope="col">{{ $user->email }}</th>
                                             <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $user->created_at)->format('d/m/Y H:i') }}</th>
                                             <th scope="col">
-                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $user->id }}"><i class="fa fa-pencil"></i></a>
+                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $user->id }}"><i class="fa fa-pen"></i></a>
                                                 <div class="modal fade edit-{{ $user->id }}" id="edit-{{ $user->id }}">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="bg-dark text-white modal-content">
@@ -140,11 +140,11 @@
                                 </tbody>
                             </table>
                             @if($users->total() > 0)
-                                <div class="card align-self-center bg-secondary {{ $users->total() > $users->perPage() ? 'bg-dark border-dark paginator' : ''}} ">
+                                <div class="card align-self-center {{ $users->total() > $users->perPage() ? 'paginator' : ''}} ">
                                     {!! $users->render()!!}
                                 </div>
                             @else
-                                <div class="card align-self-center bg-dark border-dark paginator">
+                                <div class="card align-self-center paginator">
                                     <h5>Não há usuários</h5>
                                 </div>
                             @endif

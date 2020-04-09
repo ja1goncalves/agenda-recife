@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card card-home">
-                <div class="card-header bg-dark text-white">{{ __('Verify Your Email Address') }}</div>
+                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
-                <div class="card-body bg-dark text-white">
+                <div class="card-body">
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
                             {{ __('A fresh verification link has been sent to your email address.') }}

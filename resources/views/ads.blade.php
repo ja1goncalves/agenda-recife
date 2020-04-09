@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-filter">
-                    <div class="card-body bg-secondary text-white">
+                    <div class="card-body">
                         <form method="get">
                             <div class="row col-sm-12">
                                 <div class="col-sm-2 date">
@@ -44,7 +44,7 @@
             </div>
             <div class="modal fade create-publicity" id="create-publicity">
                 <div class="modal-dialog modal-lg">
-                    <div class="bg-dark text-white modal-content">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title"><strong>Cadastre sua publcidade</strong></h5>
                             <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
@@ -83,11 +83,11 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-home">
-                    <div class="card-header bg-secondary text-light border-light"><strong style="font-size: 20px">Últimas publicidades</strong></div>
-                    <div class="card-body bg-dark text-white">
-                        <div class="card text-light table-responsive bg-secondary">
+                    <div class="card-header"><strong style="font-size: 20px">Últimas publicidades</strong></div>
+                    <div class="card-body">
+                        <div class="card table-responsive">
                             <table class="table table-striped text-center">
-                                <thead class="bg-secondary text-light text-uppercase">
+                                <thead class="text-uppercase">
                                 <tr>
                                     <th scope="col">Nome</th>
                                     <th scope="col">Data de início</th>
@@ -96,7 +96,7 @@
                                     <th scope="col">Ações</th>
                                 </tr>
                                 </thead>
-                                <tbody class="bg-dark text-light">
+                                <tbody>
                                     @foreach($ads as $ad)
                                         <tr>
                                             <th scope="col">{{ $ad->name }}</th>
@@ -104,7 +104,7 @@
                                             <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $ad->end_at)->format('d/m/Y') }}</th>
                                             <th scope="col">{{ $ad->link }}</th>
                                             <th scope="col">
-                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $ad->id }}"><i class="fa fa-pencil"></i></a>
+                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $ad->id }}"><i class="fa fa-pen"></i></a>
                                                 <div class="modal fade edit-{{ $ad->id }}" id="edit-{{ $ad->id }}">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="bg-dark text-white modal-content">
@@ -176,11 +176,11 @@
                                 </tbody>
                             </table>
                             @if($ads->total() > 0)
-                                <div class="card align-self-center bg-secondary {{ $ads->total() > $ads->perPage() ? 'bg-dark border-dark paginator' : ''}} ">
+                                <div class="card align-self-center {{ $ads->total() > $ads->perPage() ? 'paginator' : ''}} ">
                                     {!! $ads->render()!!}
                                 </div>
                             @else
-                                <div class="card align-self-center bg-dark border-dark paginator">
+                                <div class="card align-self-center paginator">
                                     <h5>Não há publicidades</h5>
                                 </div>
                             @endif

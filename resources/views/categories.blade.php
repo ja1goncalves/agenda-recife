@@ -5,15 +5,14 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-home">
-                    <div class="card-header bg-secondary text-light border-light">
+                    <div class="card-header">
                         <strong style="font-size: 20px">Categorias de eventos</strong>
-
                         <div class="float-right">
                             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#create-category">Adicionar categoria</a>
                         </div>
                         <div class="modal fade create-category" id="create-category">
                             <div class="modal-dialog modal-lg">
-                                <div class="bg-dark text-white modal-content">
+                                <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title"><strong>Cadastre uma nova categoria de evento</strong></h5>
                                         <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
@@ -33,10 +32,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body bg-dark text-white">
-                        <div class="card text-light table-responsive bg-secondary">
+                    <div class="card-body">
+                        <div class="card table-responsive">
                             <table class="table table-striped text-center">
-                                <thead class="bg-secondary text-light text-uppercase">
+                                <thead class="text-uppercase">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nome</th>
@@ -44,14 +43,14 @@
                                     <th scope="col">AÇÕES</th>
                                 </tr>
                                 </thead>
-                                <tbody class="bg-dark text-light">
+                                <tbody>
                                     @foreach($categories as $category)
                                         <tr>
                                             <th scope="col">{{ $category->id }}</th>
                                             <th scope="col">{{ $category->name }}</th>
                                             <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $category->created_at)->format('d/m/Y H:i') }}</th>
                                             <th scope="col">
-                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $category->id }}"><i class="fa fa-pencil"></i></a>
+                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $category->id }}"><i class="fa fa-pen"></i></a>
                                                 <div class="modal fade edit-{{ $category->id }}" id="edit-{{ $category->id }}">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="bg-dark text-white modal-content">
@@ -98,11 +97,11 @@
                                 </tbody>
                             </table>
                             @if($categories->total() > 0)
-                                <div class="card align-self-center bg-secondary {{ $categories->total() > $categories->perPage() ? 'bg-dark border-dark paginator' : ''}} ">
+                                <div class="card align-self-center {{ $categories->total() > $categories->perPage() ? 'paginator' : ''}} ">
                                     {!! $categories->render()!!}
                                 </div>
                             @else
-                                <div class="card align-self-center bg-dark border-dark paginator">
+                                <div class="card align-self-center paginator">
                                     <h5>Não há categorias</h5>
                                 </div>
                             @endif

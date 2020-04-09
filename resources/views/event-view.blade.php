@@ -5,8 +5,8 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-home">
-                    <div class="card-header bg-secondary text-light border-light"><strong style="font-size: 20px">{{ $event->name }}</strong></div>
-                    <div class="card-body bg-dark text-white">
+                    <div class="card-header"><strong style="font-size: 20px">{{ $event->name }}</strong></div>
+                    <div class="card-body">
                         <form method="POST" action="{{ route('update-event') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body text-center col-md-12 row">

@@ -5,8 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card card-home">
-                <div class="card-header bg-dark text-light border-light">Veja os próximos eventos</div>
-                <div class="card-body bg-secondary text-white">
+                <div class="card-header">Veja os próximos eventos</div>
+                <div class="card-body ">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -19,8 +19,8 @@
         </div>
         <div class="col-md-12">
             <div class="card card-home">
-                <div class="card-header bg-dark text-light border-light">Publicidades mais vistas</div>
-                <div class="card-body bg-secondary text-white">
+                <div class="card-header">Publicidades mais vistas</div>
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -33,8 +33,8 @@
         </div>
         <div class="col-md-12">
             <div class="card card-home">
-                <div class="card-header bg-dark text-light border-light">Últimos contatos</div>
-                <div class="card-body bg-secondary text-white">
+                <div class="card-header">Últimos contatos</div>
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}

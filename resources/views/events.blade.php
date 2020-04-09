@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-filter">
-                    <div class="card-body bg-secondary text-white">
+                    <div class="card-body">
                         <form method="get">
                             <div class="row col-sm-12">
                                 <div class="col-sm-2 date">
@@ -41,7 +41,7 @@
             </div>
             <div class="modal fade create-event" id="create-event">
                 <div class="modal-dialog modal-lg">
-                    <div class="bg-dark text-white modal-content">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title"><strong>Cadastre seu evento</strong></h5>
                             <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
@@ -127,11 +127,11 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-home">
-                    <div class="card-header bg-secondary text-light border-light"><strong style="font-size: 20px">Próximos eventos</strong></div>
-                    <div class="card-body bg-dark text-white">
-                        <div class="card text-light table-responsive bg-secondary">
+                    <div class="card-header"><strong style="font-size: 20px">Próximos eventos</strong></div>
+                    <div class="card-body">
+                        <div class="card table-responsive">
                             <table class="table table-striped text-center">
-                                <thead class="bg-secondary text-light text-uppercase">
+                                <thead class="text-uppercase">
                                 <tr>
                                     <th scope="col">Nome</th>
                                     <th scope="col">Data</th>
@@ -142,7 +142,7 @@
                                     <th scope="col">Ações</th>
                                 </tr>
                                 </thead>
-                                <tbody class="bg-dark text-light">
+                                <tbody>
                                     @foreach($events as $event)
                                         <tr>
                                             <th scope="col">{{ $event->name }}</th>
@@ -177,11 +177,11 @@
                                 </tbody>
                             </table>
                             @if($events->total() > 0)
-                                <div class="card align-self-center bg-secondary {{ $events->total() > $events->perPage() ? 'bg-dark border-dark paginator' : ''}} ">
+                                <div class="card align-self-center {{ $events->total() > $events->perPage() ? 'paginator' : ''}} ">
                                     {!! $events->render()!!}
                                 </div>
                             @else
-                                <div class="card align-self-center bg-dark border-dark paginator">
+                                <div class="card align-self-center paginator">
                                     <h5>Não há eventos</h5>
                                 </div>
                             @endif

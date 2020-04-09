@@ -1,0 +1,96 @@
+/*
+ *
+ *   Safari - Responsive Admin Theme
+ *   version 1.0
+ *
+*/
+
+
+.display_align_center {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100vh;
+}
+.logo-safari {
+    text-align: center;
+}
+.logo-safari img {
+    width: 150px;
+    max-width: 100%;
+}
+.passwordBox .logo-safari {
+    margin-bottom: 20px;
+}
+.passwordBox .m-t {
+    text-align: center;
+}
+.avatar-login {
+    width: 100px;
+    max-width: 100%;
+}
+.logo-safari-admin {
+    padding: 14px 25px 15px;
+    border-bottom: 1px solid #293846;
+    background: #2f4050;
+}
+.float-right a {
+    color: #676a6c;
+}
+.float-right a:hover {
+    color: #1ab394;
+}
+#model-transaction {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    background: rgba(0,0,0,0.8);
+    display: none;
+}
+#transaction-content {
+    background: #fff;
+    padding: 30px;
+    width: 500px;
+    max-width: 100%;
+    position: relative;
+}
+#transaction-content.loader {
+    background: #fff url(loader.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 80px;
+    padding: 80px;
+}
+a.close-modal {
+    font-size: 20px;
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    color: #fff;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 42px;
+    background: #000;
+}
+a.close-modal:hover {
+    color: #fff;
+}
+.kt-portlet__body .kt-widget1.kt-widget1--fit .kt-widget1__item {
+    border: 1px solid #ebedf2;
+    padding: 30px;
+    margin-bottom: 25px;
+}

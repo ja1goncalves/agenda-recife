@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="{{ url('/css/jquery-confirm.min.css') }}">
     <script src="{{ url('/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 
+    <link href="{{ asset('/assets/vendors/global/vendors.bundle.css') }}" rel="stylesheet" type="text/css" />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css" rel="stylesheet"/>
@@ -39,21 +41,19 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">
+        @guest
+        @else
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <div class="row logo">
+                <div class="row logo col-md-3">
                     <a class="navbar-brand text-success align-middle title-navbar" target="_blank" href="http://www.safari.com.br/">
-                        <strong><i>safari</i></strong>
+                        <a href="http://www.safari.com.br/" target="_blank" class="col-md-6"><img style="width: 100%" src="{{ asset('images/icon/logo_safari.png') }}" alt="Safari Agência Digital"></a>
                     </a>
                     <div class="vertical-line"></div>
-                    <a class="navbar-brand text-warning align-middle" href="{{ url('/') }}">
+                    <a class="navbar-brand text-secondary align-middle col-lg-3" href="{{ url('/') }}">
                         <strong>Agenda Recife</strong>
                     </a>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
@@ -63,46 +63,41 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('events') }}"><span><i class="fa fa-calendar"></i></span> {{ __('Eventos') }}</a>
+                                <a class="nav-link" href="{{ route('events') }}"><span><i class="fa fa-calendar"></i></span> {{ __('Eventos') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('ads') }}"><span><i class="fa fa-line-chart"></i></span> {{ __('Publicidades') }}</a>
+                                <a class="nav-link" href="{{ route('ads') }}"><span><i class="fa fa-line-chart"></i></span> {{ __('Publicidades') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('reports') }}"><span><i class="fa fa-envelope"></i></span> {{ __('Contatos') }}</a>
+                                <a class="nav-link" href="{{ route('reports') }}"><span><i class="fa fa-envelope"></i></span> {{ __('Contatos') }}</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdownConfiguration" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdownConfiguration" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <span><i class="fa fa-gear"></i></span> {{ __('Configurações') }}
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdownConfiguration">
-                                    <a class="dropdown-item text-white bg-dark" href="{{ route('categories') }}">
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownConfiguration">
+                                    <a class="dropdown-item" href="{{ route('categories') }}">
                                         <span><i class="fa fa-sliders"></i></span> {{ __('Categorias dos eventos') }}
                                     </a>
-                                    <a class="dropdown-item text-white bg-dark" href="{{ route('tags') }}">
+                                    <a class="dropdown-item" href="{{ route('tags') }}">
                                         <span><i class="fa fa-tags"></i></span> {{ __('Tags dos eventos') }}
                                     </a>
-                                    <a class="dropdown-item text-white bg-dark" href="{{ route('users') }}">
+                                    <a class="dropdown-item" href="{{ route('users') }}">
                                         <span><i class="fa fa-users"></i></span> {{ __('Usuários') }}
                                     </a>
-                                    <a class="dropdown-item text-white bg-dark" href="{{ route('permissions') }}">
+                                    <a class="dropdown-item" href="{{ route('permissions') }}">
                                         <span><i class="fa fa-unlock-alt"></i></span> {{ __('Permissões') }}
                                     </a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-danger bg-dark" href="{{ route('logout') }}"
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <span><i class="fa fa-power-off"></i></span> {{ __('Sair') }}
@@ -113,11 +108,11 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
                     </ul>
                 </div>
             </div>
         </nav>
+        @endguest
         <main class="py-4">
             <div class="container">
                 <div class="row justify-content-center">

@@ -11,7 +11,9 @@
 
 .card-home {
     margin-bottom: 20px;
-    box-shadow: 10px 10px gray;
+    box-shadow: 5px 5px seagreen;
+    border-color: seagreen;
+    background-color: white;
 }
 
 .card-filter {

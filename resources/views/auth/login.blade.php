@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center middle-box text-center loginscreen animated fadeInDown">
         <div class="col-md-5">
-            <div class="card">
+            <div class="card card-home">
                 <div class="card-header text-center">
                     <div class="logo-safari">
                         <a href="http://www.safari.com.br/" target="_blank"><img style="width: 45%" src="{{ asset('images/icon/logo_safari.png') }}" alt="Safari Agência Digital"></a>

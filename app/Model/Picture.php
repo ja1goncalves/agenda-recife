@@ -21,7 +21,7 @@ class Picture extends AppModel
      * @param $id
      * @return mixed
      */
-    public static function saveByImageable($picture, $type, $id)
+    public static function saveByImageable($picture, $type = null, $id = null)
     {
         return Picture::create([
             'image' => base64_encode(file_get_contents($picture->path())),

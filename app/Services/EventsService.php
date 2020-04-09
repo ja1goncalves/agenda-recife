@@ -103,29 +103,13 @@ class EventsService extends AppService
         endif;
 
         if (isset($data['main_picture'])):
-            $picture = $event->mainPicture()->create([
-                'image' => base64_encode(file_get_contents($data['main_picture']->path())),
-                'title' => $data['main_picture']->getClientOriginalName(),
-                'mimetype' => $data['main_picture']->getMimeType(),
-                'size' => $data['main_picture']->getSize(),
-                'path' => $data['main_picture']->path(),
-                'imageable_type' => Event::class,
-                'imageable_id' => $event->id,
-            ]);
+            $picture = Picture::saveByImageable($data['main_picture']);
             $this->model->edit($event->id, ['main_picture_id' => $picture->id]);
         endif;
 
         if (isset($data['pictures'])):
             foreach ($data['pictures'] as $picture):
-                $event->pictures()->create([
-                    'image' => base64_encode(file_get_contents($picture->path())),
-                    'title' => $picture->getClientOriginalName(),
-                    'mimetype' => $picture->getMimeType(),
-                    'size' => $picture->getSize(),
-                    'path' => $picture->path(),
-                    'imageable_id' =>  $event->id,
-                    'imageable_type' => Event::class
-                ]);
+                Picture::saveByImageable($picture, Event::class, $event->id);
             endforeach;
         endif;
 
@@ -161,7 +145,7 @@ class EventsService extends AppService
 
         if (isset($data['main_picture'])):
             $event->mainPicture()->delete();
-            $picture = Picture::saveByImageable($data['main_picture'], Event::class, $event->id);
+            $picture = Picture::saveByImageable($data['main_picture']);
             $this->model->edit($event->id, ['main_picture_id' => $picture->id]);
         endif;
 

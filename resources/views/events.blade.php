@@ -52,7 +52,12 @@
                                 <div class="form-group col-md-6">
                                     <input type="text" name="name" class="form-control form-event" placeholder="Nome" required>
                                     <input type="text" name="location" class="form-control form-event" placeholder="Localização" required>
-                                        <input type="text" name="when" class="form-control form-event" placeholder="Data" required>
+                                    <div class="date">
+                                        <input type="text" name="when" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="when" class="form-control form-event datepicker" placeholder="Data do evento" required>
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
                                     <div class="custom-file form-event">
                                         <input type="file" name="main_picture" class="custom-file-input form-event" id="main_picture">
                                         <label class="custom-file-label text-left" for="main_picture">Imagem principal</label>
@@ -77,7 +82,12 @@
                                     <input type="text" name="artist" class="form-control form-event" placeholder="Artista">
                                     <input type="text" name="sale_link" class="form-control form-event" placeholder="Link">
                                     <input type="text" name="hour" class="form-control form-event" placeholder="Horário" required>
-                                    <input type="text" name="end_at" class="form-control form-event" placeholder="Data do fim (não necessário)">
+                                    <div class="date">
+                                        <input type="text" name="end_at" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="when" class="form-control form-event datepicker" placeholder="Data do fim (não necessário)">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
                                     <div class="col-md-12 row" style="right: -10px">
                                         <div class="custom-checkbox mb-3 text-left col-md-6" style="margin-top: 15px">
                                             <input type="checkbox" name="indicated" class="custom-control-input" id="indicated-check">

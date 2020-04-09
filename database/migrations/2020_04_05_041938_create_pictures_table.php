@@ -20,8 +20,8 @@ class CreatePicturesTable extends Migration
             $table->string('mimetype')->default('jpg');
             $table->unsignedInteger('size')->default(0);
             $table->string('path')->nullable();
-            $table->unsignedBigInteger('imageable_id');
-            $table->string('imageable_type');
+            $table->unsignedBigInteger('imageable_id')->nullable();
+            $table->string('imageable_type')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

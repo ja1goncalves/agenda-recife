@@ -12,6 +12,22 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <!--begin::Fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                "families":[
+                    "Poppins:300,400,500,600,700",
+                    "Roboto:300,400,500,600,700"]},
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+        });
+
+        let base_url = '{{ url('/') }}';
+        let page = '{{ Route::current()->getName() }}';
+    </script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -32,7 +48,9 @@
     <link rel="stylesheet" href="{{ url('/css/jquery-confirm.min.css') }}">
     <script src="{{ url('/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 
+    <script src="{{ asset('/assets/js/demo6/scripts.bundle.js') }}" type="text/javascript"></script>
     <link href="{{ asset('/assets/vendors/global/vendors.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/assets/css/demo6/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
@@ -44,14 +62,14 @@
         @guest
         @else
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container" style="display: contents">
                 <div class="row logo col-md-3">
                     <a class="navbar-brand text-success align-middle title-navbar" target="_blank" href="http://www.safari.com.br/">
-                        <a href="http://www.safari.com.br/" target="_blank" class="col-md-6"><img style="width: 100%" src="{{ asset('images/icon/logo_safari.png') }}" alt="Safari Agência Digital"></a>
+                        <a href="http://www.safari.com.br/" target="_blank" class="col-md-4"><img style="width: 100%" src="{{ asset('images/icon/logo_safari.png') }}" alt="Safari Agência Digital"></a>
                     </a>
                     <div class="vertical-line"></div>
                     <a class="navbar-brand text-secondary align-middle col-lg-3" href="{{ url('/') }}">
-                        <strong>Agenda Recife</strong>
+                        <strong class="text-dark">Agenda Recife</strong>
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -63,34 +81,6 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('events') }}"><span><i class="fa fa-calendar"></i></span> {{ __('Eventos') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('ads') }}"><span><i class="fa fa-line-chart"></i></span> {{ __('Publicidades') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('reports') }}"><span><i class="fa fa-envelope"></i></span> {{ __('Contatos') }}</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdownConfiguration" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <span><i class="fa fa-gear"></i></span> {{ __('Configurações') }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownConfiguration">
-                                    <a class="dropdown-item" href="{{ route('categories') }}">
-                                        <span><i class="fa fa-sliders"></i></span> {{ __('Categorias dos eventos') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('tags') }}">
-                                        <span><i class="fa fa-tags"></i></span> {{ __('Tags dos eventos') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('users') }}">
-                                        <span><i class="fa fa-users"></i></span> {{ __('Usuários') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('permissions') }}">
-                                        <span><i class="fa fa-unlock-alt"></i></span> {{ __('Permissões') }}
-                                    </a>
-                                </div>
-                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
@@ -100,7 +90,7 @@
                                     <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        <span><i class="fa fa-power-off"></i></span> {{ __('Sair') }}
+                                        <span><i class="fa fa-power-off"></i></span>&nbsp;{{ __('Sair') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -123,7 +113,22 @@
                     </div>
                 </div>
             </div>
-            @yield('content')
+            <?php echo view("partials/_header-base-mobile")->render(); ?>
+            <div class="kt-grid kt-grid--hor kt-grid--root">
+                <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+                    <?php echo view("partials/_aside-base")->render(); ?>
+                    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+                        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+                            <!-- begin:: Content -->
+
+                        @yield('content')
+
+                        <!-- end:: Content -->
+                        </div>
+                        <?php echo view("partials/_footer-base")->render(); ?>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
     <script src="{{ url('/js/popper.min.js') }}"></script>

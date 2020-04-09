@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card card-filter">
+                <div class="card card-filter card-home">
                     <div class="card-body">
                         <form method="get">
                             <div class="row col-sm-12">

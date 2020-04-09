@@ -12,15 +12,15 @@
 .card-home {
     width: 100%;
     margin-bottom: 20px;
-    box-shadow: 5px 5px seagreen;
-    border-color: seagreen;
+    box-shadow: 5px 5px mediumseagreen;
+    border-color: mediumseagreen;
     background-color: white;
 }
 
 .card-filter {
     margin-bottom: 20px;
-    box-shadow: 5px 5px seagreen;
-    border-color: seagreen;
+    box-shadow: 5px 5px mediumseagreen;
+    border-color: mediumseagreen;
     background-color: white;
 }
 

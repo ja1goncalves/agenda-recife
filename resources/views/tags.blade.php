@@ -54,7 +54,7 @@
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $tag->id }}"><i class="fa fa-pen"></i></a>
                                                 <div class="modal fade edit-{{ $tag->id }}" id="edit-{{ $tag->id }}">
                                                     <div class="modal-dialog modal-lg">
-                                                        <div class="bg-dark text-white modal-content">
+                                                        <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title"><strong>Editar</strong></h5>
                                                                 <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
@@ -77,7 +77,7 @@
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $tag->id }}"><i class="fa fa-trash text-danger"></i></a>
                                                 <div class="modal fade delete-{{ $tag->id }}" id="delete-{{ $tag->id }}">
                                                     <div class="modal-dialog modal-lg">
-                                                        <div class="bg-dark text-white modal-content">
+                                                        <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title"><strong>Você deseja realmente excluir essa tag?</strong></h5>
                                                                 <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>

@@ -53,7 +53,7 @@
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $category->id }}"><i class="fa fa-pen"></i></a>
                                                 <div class="modal fade edit-{{ $category->id }}" id="edit-{{ $category->id }}">
                                                     <div class="modal-dialog modal-lg">
-                                                        <div class="bg-dark text-white modal-content">
+                                                        <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title"><strong>Editar Categoria</strong></h5>
                                                                 <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
@@ -76,7 +76,7 @@
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $category->id }}"><i class="fa fa-trash text-danger"></i></a>
                                                 <div class="modal fade delete-{{ $category->id }}" id="delete-{{ $category->id }}">
                                                     <div class="modal-dialog modal-lg">
-                                                        <div class="bg-dark text-white modal-content">
+                                                        <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title"><strong>Você deseja realmente excluir essa categoria?</strong></h5>
                                                                 <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>

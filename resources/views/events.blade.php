@@ -14,13 +14,13 @@
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <input type="text" name="name" class="form-control" id="name" placeholder="Nome do evento" value="{{ $filter['name'] }}">
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="text" name="artist" class="form-control" placeholder="Artista" value="{{ $filter['artist'] }}">
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <input type="text" name="location" class="form-control" placeholder="Localização" value="{{ $filter['location'] }}">
                                 </div>
                                 <div class="col-md-2 text-center">
@@ -30,9 +30,6 @@
                                     <a class="btn btn-danger" title="Limpar filtro" href="{{ route('events')}}">
                                         <i class="fa fa-close" id="i-clear"></i>
                                     </a>
-                                </div>
-                                <div class="col-md-2 col-sm-2 clearfix">
-                                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#create-event">Adicionar Evento</a>
                                 </div>
                             </div>
                         </form>
@@ -127,7 +124,12 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-home">
-                    <div class="card-header"><strong style="font-size: 20px">Próximos eventos</strong></div>
+                    <div class="card-header">
+                        <strong style="font-size: 20px">Próximos eventos</strong>
+                        <div class="col-md-2 col-sm-2 clearfix float-right">
+                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#create-event">Adicionar Evento</a>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="card table-responsive">
                             <table class="table table-striped text-center">

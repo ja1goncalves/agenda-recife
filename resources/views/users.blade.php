@@ -8,10 +8,10 @@
                     <div class="card-body">
                         <form method="get">
                             <div class="row col-sm-12">
-                                <div class="col-sm-4">
+                                <div class="col-sm-5">
                                     <input type="text" name="email" id="email" class="form-control"  placeholder="E-mail" value="{{ $filter['email'] }}">
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-5">
                                     <input type="text" name="name" class="form-control" id="name" placeholder="Nome" value="{{ $filter['name'] }}">
                                 </div>
                                 <div class="col-md-2 text-center">
@@ -22,9 +22,6 @@
                                         <i class="fa fa-close" id="i-clear"></i>
                                     </a>
                                 </div>
-                                <div class="col-md-2 col-sm-2 clearfix">
-                                    <a href="{{ route('register') }}" class="btn btn-success">Adicionar Usuário</a>
-                                </div>
                             </div>
                         </form>
                     </div>
@@ -34,7 +31,12 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-home">
-                    <div class="card-header"><strong style="font-size: 20px">Usuários registrados</strong></div>
+                    <div class="card-header">
+                        <strong style="font-size: 20px">Usuários registrados</strong>
+                        <div class="col-md-2 col-sm-2 clearfix float-right">
+                            <a href="{{ route('register') }}" class="btn btn-success">Adicionar Usuário</a>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="card table-responsive">
                             <table class="table table-striped text-center">
@@ -91,7 +93,7 @@
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $user->id }}"><i class="fa fa-trash text-danger"></i></a>
                                                 <div class="modal fade delete-{{ $user->id }}" id="delete-{{ $user->id }}">
                                                     <div class="modal-dialog modal-lg">
-                                                        <div class="bg-dark text-white modal-content">
+                                                        <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title"><strong>Você deseja realmente excluir esse usuário?</strong></h5>
                                                                 <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
@@ -106,10 +108,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a href="#" title="Permissões" data-toggle="modal" data-target="#permissions-{{ $user->id }}"><i class="fa fa-unlock text-white"></i></a>
+                                                <a href="#" title="Permissões" data-toggle="modal" data-target="#permissions-{{ $user->id }}"><i class="fa fa-unlock text-success"></i></a>
                                                 <div class="modal fade permissions-{{ $user->id }}" id="permissions-{{ $user->id }}">
                                                     <div class="modal-dialog modal-lg">
-                                                        <div class="bg-dark text-white modal-content">
+                                                        <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title"><strong>Permissoões do usuário</strong></h5>
                                                                 <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>

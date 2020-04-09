@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card card-filter">
+                <div class="card-filter card">
                     <div class="card-body">
                         <form method="get">
                             <div class="row col-sm-12">
@@ -20,10 +20,10 @@
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <input type="text" name="name" class="form-control" id="name" placeholder="Nome da publicidade" value="{{ $filter['name'] }}">
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <input type="text" name="link" class="form-control" placeholder="Link" value="{{ $filter['link'] }}">
                                 </div>
                                 <div class="col-md-2 text-center">
@@ -33,9 +33,6 @@
                                     <a class="btn btn-danger" title="Limpar filtro" href="{{ route('ads')}}">
                                         <i class="fa fa-close" id="i-clear"></i>
                                     </a>
-                                </div>
-                                <div class="col-md-2 col-sm-2 clearfix">
-                                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#create-publicity">Criar Publicidade</a>
                                 </div>
                             </div>
                         </form>
@@ -83,7 +80,12 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-home">
-                    <div class="card-header"><strong style="font-size: 20px">Últimas publicidades</strong></div>
+                    <div class="card-header">
+                        <strong style="font-size: 20px">Últimas publicidades</strong>
+                        <div class="col-md-2 col-sm-2 clearfix float-right">
+                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#create-publicity">Criar Publicidade</a>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="card table-responsive">
                             <table class="table table-striped text-center">

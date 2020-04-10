@@ -28,8 +28,8 @@
                 <li class="kt-menu__item {{ in_array($current_page, ['permissions', 'inactive-route', 'update-routes', 'del-route']) ? 'kt-menu__item--active' : '' }} " aria-haspopup="true" >
                     <a href="{{ route('permissions') }}" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-unlock"></i><span class="kt-menu__link-text"><strong>Permissões</strong></span></a>
                 </li>
-                <li class="disabled kt-menu__item {{ in_array($current_page, ['notificacoes', 'notificacoes-view']) ? 'kt-menu__item--active' : '' }} " aria-haspopup="true" disabled>
-                    <a href="{{ url('/notificacao') }}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-notification"></i><span class="kt-menu__link-text"><strong>Notificações</strong></span></a>
+                <li class="kt-menu__item {{ in_array($current_page, ['notificacoes', 'notificacoes-view']) ? 'kt-menu__item--active' : '' }} " aria-haspopup="true">
+                    <a href="{{ url('/notificacao') }}" class="disabled kt-menu__link "><i class="kt-menu__link-icon flaticon2-notification"></i><span class="kt-menu__link-text" disabled><strong>Notificações</strong></span></a>
                 </li>
             </ul>
         </div>

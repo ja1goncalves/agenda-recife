@@ -68,16 +68,21 @@
         @else
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container" style="display: contents">
-                <div class="row logo col-md-3">
-                    <a class="navbar-brand text-success align-middle title-navbar" target="_blank" href="http://www.safari.com.br/">
-                        <a href="http://www.safari.com.br/" target="_blank" class="col-md-4"><img style="width: 100%" src="{{ asset('images/icon/logo_safari.png') }}" alt="Safari Agência Digital"></a>
-                    </a>
+                <div class="row logo">
+                    <div class="kt-header__brand-logo">
+                        <a href="http://www.safari.com.br/">
+                            <img alt="Logo" src="{{ asset('images/icon/logo_safari.png') }}" style="width: 90px;" />
+                        </a>
+                    </div>
                     <div class="vertical-line"></div>
-                    <a class="navbar-brand text-secondary align-middle col-lg-3" href="{{ url('/') }}">
-                        <strong class="text-dark">Agenda Recife</strong>
+                    <a class="navbar-brand text-secondary align-middle" href="{{ url('/') }}">
+                        <strong class="text-dark font-italic" style="font-size: 20px; margin-left: 5px">Agenda Recife</strong>
                     </a>
                 </div>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <button class="navbar-toggler float-right nav-up" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
@@ -86,23 +91,51 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
+                        <li class="nav-item">
+                            <a class="nav-link nav-up" href="{{ route('events') }}"><span><i class="fa fa-calendar"></i></span> {{ __('Eventos') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-up" href="{{ route('ads') }}"><span><i class="fa fa-line-chart"></i></span> {{ __('Publicidades') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-up" href="{{ route('reports') }}"><span><i class="fa fa-envelope"></i></span> {{ __('Contatos') }}</a>
+                        </li>
+                        <li class="nav-item dropdown nav-up">
+                            <a id="navbarDropdownConfiguration nav-up" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <span><i class="fa fa-gear"></i></span> {{ __('Configurações') }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownConfiguration">
+                                <a class="dropdown-item" href="{{ route('categories') }}">
+                                    <span><i class="fa fa-sliders"></i></span> {{ __('Categorias dos eventos') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('tags') }}">
+                                    <span><i class="fa fa-tags"></i></span> {{ __('Tags dos eventos') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('users') }}">
+                                    <span><i class="fa fa-users"></i></span> {{ __('Usuários') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('permissions') }}">
+                                    <span><i class="fa fa-unlock-alt"></i></span> {{ __('Permissões') }}
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-danger" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    <span><i class="fa fa-power-off"></i></span>&nbsp;{{ __('Sair') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-danger" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        <span><i class="fa fa-power-off"></i></span>&nbsp;{{ __('Sair') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -117,7 +150,6 @@
                     </div>
                 </div>
             </div>
-            <?php echo view("partials/_header-base-mobile")->render(); ?>
             <div class="kt-grid kt-grid--hor kt-grid--root">
                 <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
                     <?php echo view("partials/_aside-base")->render(); ?>

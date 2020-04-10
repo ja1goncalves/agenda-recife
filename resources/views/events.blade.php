@@ -127,7 +127,7 @@
                     <div class="card-header">
                         <strong style="font-size: 20px">Próximos eventos</strong>
                         <div class="col-md-2 col-sm-2 clearfix float-right">
-                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#create-event">Adicionar Evento</a>
+                            <a href="{{ url('editar-evento?id=*') }}" class="btn btn-success">Adicionar Evento</a>
                         </div>
                     </div>
                     <div class="card-body">

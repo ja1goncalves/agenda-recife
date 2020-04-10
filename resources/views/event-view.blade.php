@@ -14,9 +14,9 @@
                                     <input type="hidden" name="id" id="id" class="form-control form-event" value="{{ $event->id }}" placeholder="Nome" required>
                                     <label for="name"><strong>Nome</strong></label>
                                     <input type="text" name="name" id="name" class="form-control form-event" value="{{ $event->name }}" placeholder="Nome" required>
-                                    <label for="name"><strong>Localização</strong></label>
-                                    <input type="text" name="location" class="form-control form-event" value="{{ $event->location }}" placeholder="Localização" required>
-                                    <label for="name"><strong>Data</strong></label>
+                                    <label for="location"><strong>Localização</strong></label>
+                                    <input type="text" name="location" id="location" class="form-control form-event" value="{{ $event->location }}" placeholder="Localização" required>
+                                    <label for="when"><strong>Data</strong></label>
                                     <div class="date">
                                         <input type="text" name="when" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="when" class="form-control form-event datepicker" value="{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->when)->format('d/m/Y') }}" placeholder="Data do evento" required>
                                         <div class="input-group-addon">
@@ -60,20 +60,20 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 text-left">
-                                    <label for="name"><strong>Artista</strong></label>
-                                    <input type="text" name="artist" class="form-control form-event" value="{{ $event->artist }}" placeholder="Artista">
-                                    <label for="name"><strong>Link</strong></label>
-                                    <input type="text" name="sale_link" class="form-control form-event" value="{{ $event->sale_link }}" placeholder="Link">
-                                    <label for="name"><strong>Horário</strong></label>
-                                    <input type="time" name="hour" class="form-control form-event" value="{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->when)->format('H:i') }}" placeholder="Horário" required>
-                                    <label for="name"><strong>Date de fim do evento</strong></label>
+                                    <label for="artist"><strong>Artista</strong></label>
+                                    <input type="text" name="artist" id="artist" class="form-control form-event" value="{{ $event->artist }}" placeholder="Artista">
+                                    <label for="sale_link"><strong>Link</strong></label>
+                                    <input type="text" name="sale_link" id="sale_link" class="form-control form-event" value="{{ $event->sale_link }}" placeholder="Link">
+                                    <label for="hour"><strong>Horário</strong></label>
+                                    <input type="time" name="hour" id="hour" class="form-control form-event" value="{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->when)->format('H:i') }}" placeholder="Horário" required>
+                                    <label for="end_at"><strong>Date de fim do evento</strong></label>
                                     <div class="date">
                                         <input type="text" name="end_at" data-provide="datepicker" data-date-format="dd/mm/yyyy" id="end_at" class="form-control form-event datepicker" value="{{ $event->end_at ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->end_at)->format('d/m/Y') : ''}}" placeholder="Data do fim (não necessário)">
                                         <div class="input-group-addon">
                                             <span class="glyphicon glyphicon-th"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 row" style="right: -10px; margin-top: 25px">
+                                    <div class="col-md-12 row" style="right: -10px; margin-top: 20px">
                                         <div class="custom-checkbox mb-3 text-left col-md-6" style="margin-top: 15px">
                                             <input type="checkbox" name="indicated" class="custom-control-input" id="indicated-check" {{$event->indicated ? 'checked' : ''}}>
                                             <label class="custom-control-label" for="indicated-check"> Indicado pelo Safari</label>

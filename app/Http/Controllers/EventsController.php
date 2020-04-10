@@ -41,7 +41,11 @@ class EventsController extends Controller
 
     public function edit(Request $request)
     {
-        return view('event-view')->with($this->service->find($request->get('id')));
+        $id = $request->get('id');
+        if ($id == '*')
+            return view('event-add')->with(['categories' => $this->service->categories(), 'tags' => $this->service->tags()]);
+        else
+            return view('event-view')->with($this->service->find($request->get('id')));
     }
 
     public function update(CreateEventRequest $request)

@@ -8810,13 +8810,13 @@ a.text-dark:hover, a.text-dark:focus {
 
 .btn-success {
   color: #fff;
-  background-color: #1dc9b7;
-  border-color: #1dc9b7;
+  background-color: mediumseagreen;
+  border-color: mediumseagreen;
   color: #ffffff; }
   .btn-success:hover {
     color: #fff;
-    background-color: #18a899;
-    border-color: #179c8e; }
+    background-color: seagreen;
+    border-color: seagreen; }
   .btn-success:focus, .btn-success.focus {
     -webkit-box-shadow: 0 0 0 0.2rem rgba(63, 209, 194, 0.5);
     box-shadow: 0 0 0 0.2rem rgba(63, 209, 194, 0.5); }

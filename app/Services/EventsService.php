@@ -176,4 +176,14 @@ class EventsService extends AppService
     {
         $this->model->remove($id);
     }
+
+    public function categories()
+    {
+        return $this->category->newQuery()->orderBy('name', 'desc')->get();
+    }
+
+    public function tags()
+    {
+        return $this->tag->newQuery()->orderBy('name', 'desc')->get();
+    }
 }

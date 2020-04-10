@@ -58,11 +58,11 @@ class User extends Authenticatable
             $users = $users->where('name', 'like', "%{$filter['email']}%");
 
         if(Auth::user()->id == 1):
-            return $users->orderBy('id', 'DESC')
+            return $users->orderBy('created_at', 'ASC')
                 ->limit(isset($filter['limit']) ? $filter['limit'] : $limit )
                 ->paginate(isset($filter['page']) ? $filter['page'] : 1);
         else:
-            return $users->where('id', '<>', 1)->orderBy('name')->paginate($limit);
+            return $users->where('id', '<>', 1)->orderBy('id', 'DESC')->paginate($limit);
         endif;
     }
 

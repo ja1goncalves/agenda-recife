@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Model\Permission;
 use App\Model\User;
 use App\Model\UserPermission;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +45,24 @@ class UsersService extends AppService
                 'email' => $data['email'] ?? '',
             ]
         ];
+    }
+
+    public function createPermissions(array $permissions, $user_id)
+    {
+        $permissions_able = array_keys($permissions);
+        foreach (Permission::all() as $permission):
+            $user_permissions = [
+                'user_id' => $user_id,
+                'permission_id' => $permission->id,
+                'auth' => false
+            ];
+            if(in_array($permission->id, $permissions_able)):
+                $user_permissions['auth'] = true;
+                $this->permission->add($user_permissions);
+            else:
+                $this->permission->add($user_permissions);
+            endif;
+        endforeach;
     }
 
     public function updatePermissions(array $permissions)

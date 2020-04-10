@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Model\Permission;
 use App\Providers\RouteServiceProvider;
 use App\Model\User;
+use App\Services\UsersService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -27,6 +29,7 @@ class RegisterController extends Controller
 
     use RegistersUsers {
         register as registerMaster;
+        showRegistrationForm as registerForm;
     }
 
     /**
@@ -37,12 +40,18 @@ class RegisterController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
+     * @var UsersService
+     */
+    protected $service;
+
+    /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param UsersService $service
      */
-    public function __construct()
+    public function __construct(UsersService $service)
     {
+        $this->service = $service;
         $this->middleware('auth');
     }
 
@@ -59,6 +68,11 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('auth.register')->with(['permissions' => Permission::all()->sortBy('route')]);
     }
 
     /**
@@ -87,6 +101,8 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
+
+        $this->service->createPermissions($request->get('permissions'), $user->id);
 
         return redirect('usuarios');
     }

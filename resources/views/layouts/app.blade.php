@@ -60,6 +60,11 @@
 <body>
     <div id="app">
         @guest
+            <main class="py-4">
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+                @yield('content')
+            </div>
+            </main>
         @else
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container" style="display: contents">
@@ -102,7 +107,6 @@
                 </div>
             </div>
         </nav>
-        @endguest
         <main class="py-4">
             <div class="container">
                 <div class="row justify-content-center">
@@ -130,6 +134,7 @@
                 </div>
             </div>
         </main>
+        @endguest
     </div>
     <script src="{{ url('/js/popper.min.js') }}"></script>
     <script src="{{ url('/js/owl.carousel.min.js') }}"></script>

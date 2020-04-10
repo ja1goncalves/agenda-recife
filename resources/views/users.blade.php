@@ -60,7 +60,7 @@
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $user->id }}"><i class="fa fa-pen"></i></a>
                                                 <div class="modal fade edit-{{ $user->id }}" id="edit-{{ $user->id }}">
                                                     <div class="modal-dialog modal-lg">
-                                                        <div class="bg-dark text-white modal-content">
+                                                        <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title"><strong>Edição</strong></h5>
                                                                 <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
@@ -123,7 +123,7 @@
                                                                     <div class="form-group col-md-4">
                                                                         <div class="custom-control custom-checkbox text-left">
                                                                             <input type="checkbox" name="permission-{{$permission->id}}" {{$permission->permission->inactive ? 'disabled' : ''}} class="custom-control-input" id="permission-check-{{$permission->id}}" {{$permission->auth ? 'checked' : ''}}>
-                                                                            <label class="custom-control-label" for="permission-check-{{$permission->id}}"> {{$permission->permission->route}}</label>
+                                                                            <label class="custom-control-label" for="permission-check-{{$permission->id}}"> {{$permission->permission ? $permission->permission->route : '?'}}</label>
                                                                         </div>
                                                                     </div>
                                                                     @endforeach

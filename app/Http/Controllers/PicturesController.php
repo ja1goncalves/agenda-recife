@@ -16,7 +16,7 @@ class PicturesController extends Controller
     /**
      * @var PicturesService
      */
-    public $service;
+    protected $service;
 
     public function __construct(PicturesService $service)
     {

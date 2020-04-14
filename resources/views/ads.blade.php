@@ -109,7 +109,7 @@
                                                 <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $ad->id }}"><i class="fa fa-pen"></i></a>
                                                 <div class="modal fade edit-{{ $ad->id }}" id="edit-{{ $ad->id }}">
                                                     <div class="modal-dialog modal-lg">
-                                                        <div class="bg-dark text-white modal-content">
+                                                        <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title"><strong>Ediar publicidade</strong></h5>
                                                                 <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
@@ -157,7 +157,7 @@
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $ad->id }}"><i class="fa fa-trash text-danger"></i></a>
                                                 <div class="modal fade delete-{{ $ad->id }}" id="delete-{{ $ad->id }}">
                                                     <div class="modal-dialog modal-lg">
-                                                        <div class="bg-dark text-white modal-content">
+                                                        <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title"><strong>Você deseja realmente excluir essa publicidade?</strong></h5>
                                                                 <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>

@@ -17,7 +17,7 @@ class EventsController extends Controller
     /**
      * @var EventsService
      */
-    public $service;
+    protected $service;
 
     /**
      * Create a new controller instance.

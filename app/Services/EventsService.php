@@ -69,9 +69,9 @@ class EventsService extends AppService
             'categories' => $this->category->newQuery()->orderBy('name', 'desc')->get(),
             'tags' => $this->tag->newQuery()->orderBy('name', 'desc')->get(),
             'filter' => [
-                'name' => $filters['name'] ?? '',
-                'artist' => $filters['artist'] ?? '',
-                'location' => $filters['location'] ?? '',
+                'name' => $data['name'] ?? '',
+                'artist' => $data['artist'] ?? '',
+                'location' => $data['location'] ?? '',
                 'when' => $data['when'] ?? '',
             ]
         ];

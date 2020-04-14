@@ -41,7 +41,7 @@
                                     <th scope="col">Rota</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Criado</th>
-                                    <th scope="col">Ações</th>
+                                    <th scope="col" hidden>Ações</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -56,7 +56,7 @@
                                                 </a>
                                             </th>
                                             <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $permission->created_at)->format('d/m/Y H:i') }}</th>
-                                            <th>
+                                            <th hidden>
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $permission->id }}"><i class="fa fa-trash text-danger"></i></a>
                                                 <div class="modal fade delete-{{ $permission->id }}" id="delete-{{ $permission->id }}">
                                                     <div class="modal-dialog modal-lg">

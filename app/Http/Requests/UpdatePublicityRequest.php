@@ -25,9 +25,9 @@ class UpdatePublicityRequest extends FormRequest
     {
         return [
             'id'        => 'required|max:150|exists:ads,id',
-            'name'      => 'required|string|max:150|unique:ads,name',
+            'name'      => 'required|string|max:150',
             'start_at'  => 'required|string|date_format:d/m/Y',
-            'end_at'    => 'nullable|string|date_format:d/m/Y|after:start_date',
+            'end_at'    => 'nullable|string|date_format:d/m/Y',
             'link'      => 'required|string|max:255|min:10',
             'publicity' => 'nullable|file'
         ];

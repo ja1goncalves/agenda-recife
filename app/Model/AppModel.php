@@ -52,7 +52,7 @@ class AppModel extends Model
         return empty($select) ? $query->get($select) : $query;
     }
 
-    public function  findWhere(array $wheres, $finish = false, $columns = ['*'])
+    public function findWhere(array $wheres, $finish = false, $columns = ['*'])
     {
         $query = self::query();
         foreach ($wheres as $key => $value):

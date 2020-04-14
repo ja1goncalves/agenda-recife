@@ -57,7 +57,7 @@ class EventsService extends AppService
         $this->eventTag = $eventTag;
     }
 
-    public function all(array $data)
+    public function index(array $data)
     {
         $filters = $this->filters($data);
         $events = $this->model->findWhere($filters)
@@ -79,84 +79,92 @@ class EventsService extends AppService
 
     public function create(array $data)
     {
-        $data['when'] = Carbon::createFromFormat('d/m/Y H:i', $data['when'].' '.$data['hour'])->format('Y-m-d H:i:s');
+        try {
+            $data['when'] = Carbon::createFromFormat('d/m/Y H:i', $data['when'].' '.$data['hour'])->format('Y-m-d H:i:s');
 
-        if (!is_null($data['end_at'])):
-            $data['end_at'] = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d H:m:s');
-        endif;
+            if (!is_null($data['end_at'])):
+                $data['end_at'] = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d H:m:s');
+            endif;
 
-        $data['indicated'] = isset($data['indicated']);
-        $data['featured'] = isset($data['featured']);
+            $data['indicated'] = isset($data['indicated']);
+            $data['featured'] = isset($data['featured']);
 
-        $event = $this->model->add($data);
+            $event = $this->model->add($data);
 
-        if (isset($data['category'])):
-            foreach ($data['category'] as $id => $on):
-                $this->eventCategory->add(['event_id' => $event->id, 'category_id' => $id]);
-            endforeach;
-        endif;
+            if (isset($data['category'])):
+                foreach ($data['category'] as $id => $on):
+                    $this->eventCategory->add(['event_id' => $event->id, 'category_id' => $id]);
+                endforeach;
+            endif;
 
-        if (isset($data['tag'])):
-            foreach ($data['tag'] as $id => $on):
-                $this->eventTag->add(['event_id' => $event->id, 'tag_id' => $id]);
-            endforeach;
-        endif;
+            if (isset($data['tag'])):
+                foreach ($data['tag'] as $id => $on):
+                    $this->eventTag->add(['event_id' => $event->id, 'tag_id' => $id]);
+                endforeach;
+            endif;
 
-        if (isset($data['main_picture'])):
-            $picture = Picture::saveByImageable($data['main_picture']);
-            $this->model->edit($event->id, ['main_picture_id' => $picture->id]);
-        endif;
+            if (isset($data['main_picture'])):
+                $picture = Picture::saveByImageable($data['main_picture']);
+                $event = $this->model->edit($event->id, ['main_picture_id' => $picture->id]);
+            endif;
 
-        if (isset($data['pictures'])):
-            foreach ($data['pictures'] as $picture):
-                Picture::saveByImageable($picture, Event::class, $event->id);
-            endforeach;
-        endif;
+            if (isset($data['pictures'])):
+                foreach ($data['pictures'] as $picture):
+                    Picture::saveByImageable($picture, Event::class, $event->id);
+                endforeach;
+            endif;
 
-        return $event;
+            return $this->returnSuccess($event, 'The event was saved!');
+        } catch (\Exception $e) {
+            return $this->returnError($data, $e->getMessage());
+        }
     }
 
     public function update(array $data, $id)
     {
-        $event = $this->model->getById((int)$id);
+        try {
+            $event = $this->model->getById((int)$id);
 
-        $data['when'] = Carbon::createFromFormat('d/m/Y H:i', $data['when'].' '.$data['hour'])->format('Y-m-d H:i:s');
-        $data['indicated'] = isset($data['indicated']);
-        $data['featured'] = isset($data['featured']);
+            $data['when'] = Carbon::createFromFormat('d/m/Y H:i', $data['when'].' '.$data['hour'])->format('Y-m-d H:i:s');
+            $data['indicated'] = isset($data['indicated']);
+            $data['featured'] = isset($data['featured']);
 
-        if (!is_null($data['end_at'])):
-            $data['end_at'] = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d H:m:s');
-        endif;
-        $event = $this->model->edit($event->id, $data);
+            if (!is_null($data['end_at'])):
+                $data['end_at'] = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d H:m:s');
+            endif;
+            $event = $this->model->edit($event->id, $data);
 
-        $event->eventCategory()->delete();
-        if (isset($data['category'])):
-            foreach ($data['category'] as $id => $on):
-                $this->eventCategory->add(['event_id' => $event->id, 'category_id' => $id]);
-            endforeach;
-        endif;
+            $event->eventCategory()->delete();
+            if (isset($data['category'])):
+                foreach ($data['category'] as $id => $on):
+                    $this->eventCategory->add(['event_id' => $event->id, 'category_id' => $id]);
+                endforeach;
+            endif;
 
-        $event->eventTag()->delete();
-        if (isset($data['tag'])):
-            foreach ($data['tag'] as $id => $on):
-                $this->eventTag->add(['event_id' => $event->id, 'tag_id' => $id]);
-            endforeach;
-        endif;
+            $event->eventTag()->delete();
+            if (isset($data['tag'])):
+                foreach ($data['tag'] as $id => $on):
+                    $this->eventTag->add(['event_id' => $event->id, 'tag_id' => $id]);
+                endforeach;
+            endif;
 
-        if (isset($data['main_picture'])):
-            $event->mainPicture()->delete();
-            $picture = Picture::saveByImageable($data['main_picture']);
-            $this->model->edit($event->id, ['main_picture_id' => $picture->id]);
-        endif;
+            if (isset($data['main_picture'])):
+                $event->mainPicture()->delete();
+                $picture = Picture::saveByImageable($data['main_picture']);
+                $event = $this->model->edit($event->id, ['main_picture_id' => $picture->id]);
+            endif;
 
-        if (isset($data['pictures'])):
-            $event->pictures()->delete();
-            foreach ($data['pictures'] as $picture):
-                Picture::saveByImageable($picture, Event::class, $event->id);
-            endforeach;
-        endif;
+            if (isset($data['pictures'])):
+                $event->pictures()->delete();
+                foreach ($data['pictures'] as $picture):
+                    Picture::saveByImageable($picture, Event::class, $event->id);
+                endforeach;
+            endif;
 
-        return $event;
+            return $this->returnSuccess($event, 'The event was saved');
+        } catch (\Exception $e) {
+            return $this->returnError($data, $e->getMessage());
+        }
     }
 
     public function find($id)
@@ -170,11 +178,6 @@ class EventsService extends AppService
             'categories' => $this->category->newQuery()->orderBy('name', 'desc')->get(),
             'tags' => $this->tag->newQuery()->orderBy('name', 'desc')->get(),
         ];
-    }
-
-    public function delete($id)
-    {
-        $this->model->remove($id);
     }
 
     public function categories()

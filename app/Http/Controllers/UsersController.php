@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\CrudMethods;
 use App\Services\UsersService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -9,6 +10,11 @@ use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
+    use CrudMethods {
+        store as generalStore;
+        edit as generalEdit;
+    }
+
     /**
      * @var UsersService
      */
@@ -46,7 +52,7 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->service->all($request->all());
+        $data = $this->service->index($request->all());
         return view('users')->with($data);
     }
 
@@ -63,36 +69,28 @@ class UsersController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the form for creating a new resource.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function savePermissions(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return response()->json($this->service->updatePermissions($request->all()));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $this->validator($request->all())->validate();
+        $response = $this->service->update($request->all());
+
+        return response() ->json($response);
     }
 
     /**
@@ -105,10 +103,10 @@ class UsersController extends Controller
     public function update(Request $request)
     {
         $this->validator($request->all())->validate();
-        $user = $this->service->update($request->all());
+        $response = $this->service->update($request->all());
 
-        if ($user)
-            event(new Registered($user));
+        if (!$response['error'])
+            event(new Registered($response['data']));
 
         return redirect('usuarios');
     }

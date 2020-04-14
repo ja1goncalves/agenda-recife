@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\CrudMethods;
 use App\Http\Requests\CreateEventRequest;
+use App\Http\Requests\UpdateEventRequest;
 use App\Services\EventsService;
 use Illuminate\Http\Request;
 
 class EventsController extends Controller
 {
+    use CrudMethods {
+        store as generalStore;
+        edit as generalEdit;
+    }
     /**
      * @var EventsService
      */
@@ -29,14 +35,19 @@ class EventsController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->service->all($request->all());
+        $data = $this->service->index($request->all());
         return view('events')->with($data);
     }
 
     public function create(CreateEventRequest $request)
     {
-        $event = $this->service->create($request->all());
-        return redirect('editar-evento?id='. $event->id);
+        $response = $this->service->create($request->all());
+        return redirect('editar-evento?id='. $response['data']['id']);
+    }
+
+    public function store(CreateEventRequest $eventRequest)
+    {
+        return $this->generalStore($eventRequest);
     }
 
     public function edit(Request $request)
@@ -48,10 +59,15 @@ class EventsController extends Controller
             return view('event-view')->with($this->service->find($request->get('id')));
     }
 
-    public function update(CreateEventRequest $request)
+    public function save(UpdateEventRequest $request)
+    {
+        return $this->generalEdit($request, $request->get('id'));
+    }
+
+    public function update(UpdateEventRequest $request)
     {
         $event = $this->service->update($request->all(), $request->get('id'));
-        return redirect('editar-evento?id='. $event->id);
+        return redirect('editar-evento?id='. $event['data']['id']);
     }
 
     public function destroy(Request $request)

@@ -87,15 +87,15 @@ class AppService
     {
         try {
             if (isset($data['id'])):
-                $tags = $this->model->getById((int)$data['id']);
+                $model = $this->model->getById((int)$data['id']);
             else:
                 $filters = $this->filters($data);
-                $tags = $this->model->findWhere($filters)
+                $model = $this->model->findWhere($filters)
                     ->orderBy('created_at', 'DESC')
                     ->paginate($filters['limit'] ?? 10);
             endif;
 
-            return $this->returnSuccess($tags);
+            return $this->returnSuccess($model);
         } catch (\Exception $e) {
             return $this->returnError($data, $e->getMessage());
         }

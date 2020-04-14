@@ -36,7 +36,7 @@ class UsersService extends AppService
     }
 
 
-    public function all(array $data)
+    public function index(array $data)
     {
         return [
             'users' => $this->model->listAll($data, isset($data['limit']) ? $data['limit'] : 10),
@@ -67,35 +67,41 @@ class UsersService extends AppService
 
     public function updatePermissions(array $permissions)
     {
-        unset($permissions['_token']);
-        foreach ($permissions as $key => $permission):
-            $user_permission = $this->permission->getById(preg_replace('/\D/', '', $key));
-            $this->permission->edit($user_permission->id, ['auth' => $permission == "on"]);
-        endforeach;
+        try {
+            unset($permissions['_token']);
+            foreach ($permissions as $key => $permission):
+                $user_permission = $this->permission->getById(preg_replace('/\D/', '', $key));
+                $this->permission->edit($user_permission->id, ['auth' => $permission == "on"]);
+            endforeach;
+
+            return $this->returnSuccess([], 'All permissions was updated');
+        } catch (\Exception $e) {
+            return $this->returnError($permissions, $e->getMessage());
+        }
     }
 
     /**
      * @param array $data
-     * @return bool|User
+     * @param null $id
+     * @return array
      */
-    public function update(array $data)
+    public function update(array $data, $id = null)
     {
-        $user_logged = Auth::user();
+        try{
+            $user_logged = Auth::user();
 
-        if ($user_logged->email == $data['email']):
-            $user = $this->model->getById($user_logged->id);
-            $user->name = $data['name'];
-            $user->email = $data['email'];
-            $user->password = Hash::make($data['password']);
-            $user->save();
-            return $user;
-        else:
-            return false;
-        endif;
-    }
-
-    public function delete($id)
-    {
-        $this->model->remove($id);
+            if ($user_logged->email == $data['email']):
+                $user = $this->model->getById($user_logged->id);
+                $user->name = $data['name'];
+                $user->email = $data['email'];
+                $user->password = Hash::make($data['password']);
+                $user->save();
+                return $this->returnSuccess($user);
+            else:
+                return $this->returnError();
+            endif;
+        } catch (\Exception $e) {
+            return $this->returnError($data, $e->getMessage());
+        }
     }
 }

@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 class TagsController extends Controller
 {
-
     use CrudMethods {
         store as generalStore;
         edit as generalEdit;

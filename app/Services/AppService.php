@@ -8,22 +8,23 @@
 
 namespace App\Services;
 
+use App\Model\AppModel;
 use Carbon\Carbon;
 
 /**
  * Class AppService
  * @package App\Services
- * @method create(array $all)
  * @method find(int $id)
- * @method all($get)
- * @method update(array $all, $id)
  * @method restore($id)
- * @method delete($id)
  * @method forceDelete(int $id)
- * @method findWhere(array $data)
  */
 class AppService
 {
+    /**
+     * @var AppModel
+     */
+    protected $model;
+
     /**
      * @param array|object $data
      * @param string $message
@@ -76,5 +77,68 @@ class AppService
             endif;
         endforeach;
         return $filter;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    protected function all(array $data)
+    {
+        try {
+            if (isset($data['id'])):
+                $tags = $this->model->getById((int)$data['id']);
+            else:
+                $filters = $this->filters($data);
+                $tags = $this->model->findWhere($filters)
+                    ->orderBy('created_at', 'DESC')
+                    ->paginate($filters['limit'] ?? 10);
+            endif;
+
+            return $this->returnSuccess($tags);
+        } catch (\Exception $e) {
+            return $this->returnError($data, $e->getMessage());
+        }
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function create(array $data)
+    {
+        try {
+            return $this->returnSuccess($this->model->add($data));
+        } catch (\Exception $e) {
+            return $this->returnError(['name' => $data['name']], $e->getMessage());
+        }
+    }
+
+    /**
+     * @param array $data
+     * @param $id
+     * @return array
+     */
+    public function update(array $data, $id)
+    {
+        try {
+            unset($data['_token']);
+            return $this->returnSuccess($this->model->edit($id, $data));
+        } catch (\Exception $e) {
+            return $this->returnError($data, $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function delete($id)
+    {
+        try {
+            return $this->returnSuccess($this->model->remove($id));
+        } catch (\Exception $e) {
+            return $this->returnError([], $e->getMessage());
+        }
     }
 }

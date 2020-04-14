@@ -25,26 +25,25 @@ class TagsService extends AppService
         $this->model = $model;
     }
 
-    public function all($data = [])
+    public function index($data = [])
     {
         return [
             'tags' => $this->model->listAll(isset($data['limit']) ? $data['limit'] : 10),
         ];
     }
 
-    public function create(string $name)
+    public function create(array $data)
     {
         $user_create = Auth::user();
-        $this->model->add(['name' => $name, 'created_by' => $user_create->id, 'updated_by' => $user_create->id]);
-    }
-
-    public function update(string $name, $id)
-    {
-        return $this->model->edit($id, ['name' => $name]);
-    }
-
-    public function delete($id)
-    {
-        $this->model->remove($id);
+        try {
+            $tag = $this->model->add([
+                'name' => $data['name'],
+                'created_by' => $user_create->id,
+                'updated_by' => $user_create->id
+            ]);
+            return $this->returnSuccess($tag);
+        } catch (\Exception $e) {
+            return $this->returnError($data, $e->getMessage());
+        }
     }
 }

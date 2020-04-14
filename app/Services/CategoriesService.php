@@ -25,26 +25,25 @@ class CategoriesService extends AppService
         $this->model = $model;
     }
 
-    public function all($data = [])
+    public function index($data = [])
     {
         return [
             'categories' => $this->model->listAll(isset($data['limit']) ? $data['limit'] : 15),
         ];
     }
 
-    public function create(string $name)
+    public function create(array $data)
     {
         $user_create = Auth::user();
-        $this->model->add(['name' => $name, 'created_by' => $user_create->id, 'updated_by' => $user_create->id]);
-    }
-
-    public function update(string $name, $id)
-    {
-        return $this->model->edit($id, ['name' => $name]);
-    }
-
-    public function delete($id)
-    {
-        $this->model->remove($id);
+        try {
+            $category = $this->model->add([
+                'name' => $data['name'],
+                'created_by' => $user_create->id,
+                'updated_by' => $user_create->id
+            ]);
+            return $this->returnSuccess($category);
+        } catch (\Exception $e) {
+            return $this->returnError(['name' => $data['name']], $e->getMessage());
+        }
     }
 }

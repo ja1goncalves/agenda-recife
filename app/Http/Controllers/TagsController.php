@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\CrudMethods;
 use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\UpdateTagsRequest;
 use App\Services\TagsService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TagsController extends Controller
 {
+
+    use CrudMethods {
+        store as generalStore;
+        edit as generalEdit;
+    }
 
     /**
      * @var TagsService
@@ -26,7 +34,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        return view('tags')->with($this->service->all());
+        return view('tags')->with($this->service->index());
     }
 
     /**
@@ -37,52 +45,41 @@ class TagsController extends Controller
      */
     public function create(CreateCategoryRequest $request)
     {
-        $this->service->create($request->get('name'));
+        $this->service->create($request->all());
         return redirect('tags');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateCategoryRequest $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return $this->generalStore($request);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateTagsRequest $request
+     * @return JsonResponse
      */
-    public function edit($id)
+    public function edit(UpdateTagsRequest $request)
     {
-        //
+        return $this->generalEdit($request, $request->get('id'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param UpdateTagsRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request)
+    public function update(UpdateTagsRequest $request)
     {
-        $this->service->update($request->get('name'), $request->get('id'));
+        $this->service->update($request->all(), $request->get('id'));
         return  redirect('tags');
     }
 

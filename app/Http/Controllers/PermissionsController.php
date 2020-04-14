@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\CrudMethods;
 use App\Jobs\VerificationRoutes;
 use App\Services\PermissionsService;
 use Illuminate\Http\Request;
 
 class PermissionsController extends Controller
 {
+    use CrudMethods {
+        store as generalStore;
+        edit as generalEdit;
+    }
 
     /**
      * @var PermissionsService
@@ -27,7 +32,7 @@ class PermissionsController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->service->all($request->all());
+        $data = $this->service->index($request->all());
         return view('permissions')->with($data);
     }
 
@@ -58,35 +63,13 @@ class PermissionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function refreshRoutes(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        VerificationRoutes::dispatch();
+        return response()->json($this->service->all($request->all()));
     }
 
     /**

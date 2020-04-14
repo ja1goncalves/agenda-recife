@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\CrudMethods;
 use App\Http\Requests\CreatePublicityRequest;
+use App\Http\Requests\UpdatePublicityRequest;
 use App\Services\AdsService;
 use Illuminate\Http\Request;
 
 class AdsController extends Controller
 {
+    use CrudMethods {
+        store as generalStore;
+        edit as generalEdit;
+    }
 
     /**
      * @var AdsService
@@ -27,7 +33,7 @@ class AdsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('ads')->with($this->service->all($request->all()));
+        return view('ads')->with($this->service->index($request->all()));
     }
 
     public function create(CreatePublicityRequest $request)
@@ -42,43 +48,31 @@ class AdsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePublicityRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return $this->generalStore($request);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdatePublicityRequest $request
+     * @return void
      */
-    public function edit($id)
+    public function edit(UpdatePublicityRequest $request)
     {
-        //
+        return $this->generalEdit($request, $request->get('id'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  UpdatePublicityRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request)
+    public function update(UpdatePublicityRequest $request)
     {
-        $this->service->update($request->all());
+        $this->service->update($request->all(), $request->get('id'));
         return  redirect('publicidades');
     }
 

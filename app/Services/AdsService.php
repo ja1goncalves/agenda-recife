@@ -25,7 +25,7 @@ class AdsService extends AppService
         $this->model = $model;
     }
 
-    public function all($data = [])
+    public function index($data = [])
     {
         $filters = $this->filters($data);
         $ads = $this->model->findWhere($filters)
@@ -46,48 +46,51 @@ class AdsService extends AppService
 
     public function create(array $data)
     {
-        $picture = isset($data['publicity']) ? $data['publicity'] : null;
-        unset($data['publicity']);
+        try {
+            $picture = isset($data['publicity']) ? $data['publicity'] : null;
+            unset($data['publicity']);
 
-        $data['start_at'] = Carbon::createFromFormat('d/m/Y', $data['start_at'])->format('Y-m-d');
-        $data['end_at'] = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d');
+            $data['start_at'] = Carbon::createFromFormat('d/m/Y', $data['start_at'])->format('Y-m-d');
+            $data['end_at'] = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d');
 
-        $ad = $this->model->add($data);
+            $ad = $this->model->add($data);
 
-        if (!is_null($picture)):
-            $picture = Picture::saveByImageable($picture, Ad::class, $ad->id);
-        endif;
+            if (!is_null($picture))
+                $picture = Picture::saveByImageable($picture, Ad::class, $ad->id);
+
+            return $this->returnSuccess($ad);
+        } catch (\Exception $e) {
+            return $this->returnError($data. $e->getMessage());
+        }
     }
 
     /**
      * @param array $data
+     * @param $id
      * @return mixed
      */
-    public function update(array $data)
+    public function update(array $data, $id)
     {
-//        dd($data);
-        $ad = $this->model->getById((int)$data['id']);
+        try {
+            $ad = $this->model->getById((int)$id);
 
-        if ($ad):
-            if (isset($data['publicity'])):
-                $ad->picture()->delete();
-                $picture = Picture::saveByImageable($data['publicity'], Ad::class, $ad->id);
+            if ($ad):
+                if (isset($data['publicity'])):
+                    $ad->picture()->delete();
+                    $picture = Picture::saveByImageable($data['publicity'], Ad::class, $ad->id);
+                endif;
+
+                $ad->name = isset($data['name']) ? $data['name'] : $ad->name;
+                $ad->start_at = Carbon::createFromFormat('d/m/Y', $data['start_at'])->format('Y-m-d');
+                $ad->end_at = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d');
+                $ad->link = isset($data['link']) ? $data['link'] : $ad->link;
+
+                return $this->returnSuccess(['ad' => $ad->save(), 'picture' => $picture ?? false]);
+            else:
+                return $this->returnError($data, "The publicity don't exist");
             endif;
-
-            $ad->name = isset($data['name']) ? $data['name'] : $ad->name;
-            $ad->start_at = Carbon::createFromFormat('d/m/Y', $data['start_at'])->format('Y-m-d');
-            $ad->end_at = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d');
-            $ad->link = isset($data['link']) ? $data['link'] : $ad->link;
-
-            return $ad->save();
-        else:
-            return false;
-        endif;
+        } catch (\Exception $e) {
+            return $this->returnError($data, $e->getMessage());
+        }
     }
-
-    public function delete($id)
-    {
-        $this->model->remove($id);
-    }
-
 }

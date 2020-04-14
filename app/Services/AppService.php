@@ -83,7 +83,7 @@ class AppService
      * @param array $data
      * @return array
      */
-    protected function all(array $data)
+    public function all(array $data)
     {
         try {
             if (isset($data['id'])):

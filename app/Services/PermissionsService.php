@@ -32,7 +32,7 @@ class PermissionsService extends AppService
         $this->permission = $permission;
     }
 
-    public function all(array $data)
+    public function index(array $data)
     {
         $permission = $this->model->newQuery()
             ->orderBy(isset($data['order_by']) ? $data['order_by'] : 'id', 'DESC');

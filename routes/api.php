@@ -54,9 +54,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
 
 Route::group(['prefix' => 'permissions', 'middleware' => ['auth']], function () {
     Route::get('/', 'PermissionsController@all')->name('api-permissions');
-    Route::get('/inactive', 'PermissionsController@inactive')->name('api-inactive-route');
     Route::get('/update', 'PermissionsController@refreshRoutes')->name('api-update-routes');
-    Route::delete('/delete', 'PermissionsController@delete')->name('api-del-route');
 });
 
 Route::group(['prefix' => 'ads', 'middleware' => ['auth']], function () {

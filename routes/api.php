@@ -66,9 +66,9 @@ Route::group(['prefix' => 'ads', 'middleware' => ['auth']], function () {
 
 Route::group(['prefix' => 'reports', 'middleware' => ['auth']], function () {
     Route::get('/', 'ReportsController@all')->name('api-reports');
-    Route::post('/create', 'ReportsController@create')->name('api-add-report');
-    Route::put('/edit', 'AdsController@edit')->name('api-edit-reports');
-    Route::delete('/delete', 'AdsController@delete')->name('api-del-reports');
+    Route::post('/create', 'ReportsController@store')->name('api-add-report');
+//    Route::put('/edit', 'AdsController@edit')->name('api-edit-reports');
+//    Route::delete('/delete', 'AdsController@delete')->name('api-del-reports');
 });
 
 Route::group(['middleware' => ['auth']], function () {

@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\CrudMethods;
 use App\Http\Requests\CreateReportRequest;
 use App\Services\ReportsService;
 use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
+    use CrudMethods {
+        store as generalStore;
+        edit as generalEdit;
+    }
+
     /**
      * @var ReportsService
      */
@@ -26,7 +32,7 @@ class ReportsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('reports')->with($this->service->all($request->all()));
+        return view('reports')->with($this->service->index($request->all()));
     }
 
     /**
@@ -44,23 +50,12 @@ class ReportsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  CreateReportRequest  $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(CreateReportRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return $this->generalStore($request);
     }
 
     /**

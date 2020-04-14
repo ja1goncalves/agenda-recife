@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\CrudMethods;
 use App\Services\PicturesService;
 use Illuminate\Http\Request;
 
 class PicturesController extends Controller
 {
+    use CrudMethods {
+        store as generalStore;
+        edit as generalEdit;
+    }
+
+    /**
+     * @var PicturesService
+     */
     public $service;
 
     public function __construct(PicturesService $service)

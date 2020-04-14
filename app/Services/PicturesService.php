@@ -25,20 +25,10 @@ class PicturesService extends AppService
         $this->model = $model;
     }
 
-    public function all($data = [])
+    public function index($data = [])
     {
         return [
             'pictures' => $this->model->listAll(isset($data['limit']) ? $data['limit'] : 10),
         ];
-    }
-
-    public function create(string $data, string $type, $id)
-    {
-        return Picture::saveByImageable($data, $type, $id);
-    }
-
-    public function delete($id)
-    {
-        return $this->model->remove((int)$id);
     }
 }

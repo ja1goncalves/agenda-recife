@@ -24,7 +24,7 @@ class ReportsService extends AppService
         $this->model = $model;
     }
 
-    public function all($data = [])
+    public function index($data = [])
     {
         $filters = $this->filters($data);
         $reports = $this->model->findWhere($filters)
@@ -40,10 +40,5 @@ class ReportsService extends AppService
                 'motivation' => $filters['motivation'] ?? '',
             ]
         ];
-    }
-
-    public function create(array $data)
-    {
-        return $this->model->add($data);
     }
 }

@@ -41,7 +41,7 @@ class CategoriesService extends AppService
                 'created_by' => $user_create->id,
                 'updated_by' => $user_create->id
             ]);
-            return $this->returnSuccess($category);
+            return $this->returnSuccess($category->toArray());
         } catch (\Exception $e) {
             return $this->returnError(['name' => $data['name']], $e->getMessage());
         }

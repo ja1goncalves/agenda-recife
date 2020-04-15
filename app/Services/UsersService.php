@@ -96,7 +96,7 @@ class UsersService extends AppService
                 $user->email = $data['email'];
                 $user->password = Hash::make($data['password']);
                 $user->save();
-                return $this->returnSuccess($user);
+                return $this->returnSuccess($user->toArray());
             else:
                 return $this->returnError();
             endif;

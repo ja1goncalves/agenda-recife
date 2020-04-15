@@ -41,7 +41,7 @@ class TagsService extends AppService
                 'created_by' => $user_create->id,
                 'updated_by' => $user_create->id
             ]);
-            return $this->returnSuccess($tag);
+            return $this->returnSuccess($tag->toArray());
         } catch (\Exception $e) {
             return $this->returnError($data, $e->getMessage());
         }

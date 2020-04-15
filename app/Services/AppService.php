@@ -34,7 +34,7 @@ class AppService
     protected function returnSuccess($data = [], string $message = 'Everything OK!', int $status = 200)
     {
         return [
-            'data' => $data,
+            'data' => is_array($data) ? $this->setValueNull($data) : $data,
             'error' => false,
             'message' => $message,
             'status' => $status
@@ -50,7 +50,7 @@ class AppService
     protected function returnError($data = [], string $message = 'Any error occurrence!', int $status = 500)
     {
         return [
-            'data' => $data,
+            'data' => is_array($data) ? $this->setValueNull($data) : $data,
             'error' => true,
             'message' => $message,
             'status' => $status
@@ -95,7 +95,7 @@ class AppService
                     ->paginate($filters['limit'] ?? 10);
             endif;
 
-            return $this->returnSuccess($model);
+            return $this->returnSuccess($model->toArray());
         } catch (\Exception $e) {
             return $this->returnError($data, $e->getMessage());
         }
@@ -108,7 +108,7 @@ class AppService
     public function create(array $data)
     {
         try {
-            return $this->returnSuccess($this->model->add($data));
+            return $this->returnSuccess($this->model->add($data)->toArray());
         } catch (\Exception $e) {
             return $this->returnError(['name' => $data['name']], $e->getMessage());
         }
@@ -123,7 +123,7 @@ class AppService
     {
         try {
             unset($data['_token']);
-            return $this->returnSuccess($this->model->edit($id, $data));
+            return $this->returnSuccess($this->model->edit($id, $data)->toArray());
         } catch (\Exception $e) {
             return $this->returnError($data, $e->getMessage());
         }
@@ -140,5 +140,24 @@ class AppService
         } catch (\Exception $e) {
             return $this->returnError([], $e->getMessage());
         }
+    }
+
+    protected function setValueNull($data = [])
+    {
+        $return = [];
+        if (is_bool($data) || $data === 0) return $data;
+        if (is_null($data)) return '';
+
+        if (!empty($data)):
+            if (is_array($data) || is_object($data)):
+                foreach ($data as $key => $item) :
+                    $return[$key] = $this->setValueNull($item);
+                endforeach;
+            else:
+                return is_null($data) ? '' : $data;
+            endif;
+        endif;
+
+        return $return;
     }
 }

@@ -56,9 +56,9 @@ class AdsService extends AppService
             $ad = $this->model->add($data);
 
             if (!is_null($picture))
-                $picture = Picture::saveByImageable($picture, Ad::class, $ad->id);
+                $picture = Picture::saveByImageable($picture, Ad::class, $ad->id)->toArray();
 
-            return $this->returnSuccess(['ads' => $ad, 'picture' => $picture ?? false]);
+            return $this->returnSuccess(['ads' => $ad->toArray(), 'picture' => $picture ?? false]);
         } catch (\Exception $e) {
             return $this->returnError($data. $e->getMessage());
         }
@@ -77,15 +77,16 @@ class AdsService extends AppService
             if ($ad):
                 if (isset($data['publicity'])):
                     $ad->picture()->delete();
-                    $picture = Picture::saveByImageable($data['publicity'], Ad::class, $ad->id);
+                    $picture = Picture::saveByImageable($data['publicity'], Ad::class, $ad->id)->toArray();
                 endif;
 
                 $ad->name = isset($data['name']) ? $data['name'] : $ad->name;
                 $ad->start_at = Carbon::createFromFormat('d/m/Y', $data['start_at'])->format('Y-m-d');
                 $ad->end_at = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d');
                 $ad->link = isset($data['link']) ? $data['link'] : $ad->link;
+                $ad->save();
 
-                return $this->returnSuccess(['ads' => $ad->save(), 'picture' => $picture ?? false]);
+                return $this->returnSuccess(['ads' => $ad->toArray(), 'picture' => $picture ?? false]);
             else:
                 return $this->returnError($data, "The publicity don't exist");
             endif;

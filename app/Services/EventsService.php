@@ -114,7 +114,7 @@ class EventsService extends AppService
                 endforeach;
             endif;
 
-            return $this->returnSuccess($event, 'The event was saved!');
+            return $this->returnSuccess($event->toArray(), 'The event was saved!');
         } catch (\Exception $e) {
             return $this->returnError($data, $e->getMessage());
         }
@@ -161,7 +161,7 @@ class EventsService extends AppService
                 endforeach;
             endif;
 
-            return $this->returnSuccess($event, 'The event was saved');
+            return $this->returnSuccess($event->toArray(), 'The event was saved');
         } catch (\Exception $e) {
             return $this->returnError($data, $e->getMessage());
         }

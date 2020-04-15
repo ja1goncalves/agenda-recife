@@ -30,11 +30,12 @@ class AuthServiceProvider extends ServiceProvider
         $permissions = Permission::with('userPermission')->get();
         foreach ($permissions as $permission):
             Gate::define($permission->route, function (User $user) use ($permission){
+                if ($user->mater) return !$permission->inactive;
                 $user_permission = $user->userPermissions()
                     ->where('user_id', '=', $user->id)
                     ->where('permission_id', '=', $permission->id)
                     ->first();
-                return $user_permission->auth && !$permission->inactive;
+                return ($user_permission->auth && !$permission->inactive);
             });
         endforeach;
     }

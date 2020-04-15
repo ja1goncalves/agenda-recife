@@ -58,7 +58,7 @@ class AdsService extends AppService
             if (!is_null($picture))
                 $picture = Picture::saveByImageable($picture, Ad::class, $ad->id);
 
-            return $this->returnSuccess($ad);
+            return $this->returnSuccess(['ads' => $ad, 'picture' => $picture ?? false]);
         } catch (\Exception $e) {
             return $this->returnError($data. $e->getMessage());
         }
@@ -85,7 +85,7 @@ class AdsService extends AppService
                 $ad->end_at = Carbon::createFromFormat('d/m/Y', $data['end_at'])->format('Y-m-d');
                 $ad->link = isset($data['link']) ? $data['link'] : $ad->link;
 
-                return $this->returnSuccess(['ad' => $ad->save(), 'picture' => $picture ?? false]);
+                return $this->returnSuccess(['ads' => $ad->save(), 'picture' => $picture ?? false]);
             else:
                 return $this->returnError($data, "The publicity don't exist");
             endif;

@@ -38,6 +38,7 @@ class UsersController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'id' => ['required', 'max:10'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'exists:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],

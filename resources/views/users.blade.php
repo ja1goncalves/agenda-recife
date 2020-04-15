@@ -65,10 +65,11 @@
                                                                 <h5 class="modal-title"><strong>Edição</strong></h5>
                                                                 <button type="button" class="close text-danger" data-dismiss="modal"><span>&times;</span></button>
                                                             </div>
-                                                            @if(Auth::user()->id == $user->id || Auth::user()->id == 1)
+                                                            @if(Auth::user()->id == $user->id || Auth::user()->master)
                                                             <form method="post" action="{{ route("edit-user") }}">
                                                                 @csrf
                                                                 <div class="modal-body text-center col-md-12">
+                                                                    <input type="hidden" name="id" class="form-control form-event" value="{{ $user->id }}" required>
                                                                     <input type="text" name="name" class="form-control form-event" value="{{ $user->name }}" required>
                                                                     <input type="text" name="email" class="form-control form-event" value="{{ $user->email }}" required>
                                                                     <input id="password" type="password" name="password" class="form-control form-event" placeholder="Senha" required autocomplete="new-password">

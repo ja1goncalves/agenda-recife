@@ -54,13 +54,13 @@
                                 <tbody>
                                     @foreach($reports as $report)
                                         <tr>
-                                            <th scope="col">{{ substr(0, 20, $report->subject) }}</th>
+                                            <th scope="col">{{ substr($report->subject, 0, 20) }}...</th>
                                             <th scope="col">{{ $report->email }}</th>
-                                            <th scope="col">{{ substr(0, 20, $report->motivation) }}</th>
-                                            <th scope="col">{{ substr(0, 20, $report->body) }}</th>
-                                            <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $ad->created_at)->format('d/m/Y') }}</th>
+                                            <th scope="col">{{ substr($report->motivation, 0, 20) }}...</th>
+                                            <th scope="col">{{ substr($report->body, 0, 20) }}...</th>
+                                            <th scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $report->created_at)->format('d/m/Y') }}</th>
                                             <th scope="col">
-                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $report->id }}"><i class="fa fa-pencil"></i></a>
+                                                <a href="#" title="Editar" data-toggle="modal" data-target="#edit-{{ $report->id }}"><i class="fa fa-pen"></i></a>
                                                 <a href="#" title="Remover" data-toggle="modal" data-target="#delete-{{ $report->id }}"><i class="fa fa-trash text-danger"></i></a>
                                             </th>
                                         </tr>

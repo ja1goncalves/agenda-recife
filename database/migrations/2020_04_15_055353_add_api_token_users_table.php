@@ -18,6 +18,7 @@ class AddApiTokenUsersTable extends Migration
                 ->unique()
                 ->nullable()
                 ->default(null);
+            $table->boolean('master')->after('id')->default(false);
         });
     }
 
@@ -30,6 +31,7 @@ class AddApiTokenUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('api_token');
+            $table->dropColumn('master');
         });
     }
 }

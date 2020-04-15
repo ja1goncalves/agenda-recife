@@ -27,7 +27,7 @@ Route::group(['prefix' => 'events', 'middleware' => ['auth:api', 'acl']], functi
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', 'CategoriesController@all')->name('api-categories');
         Route::post('/create', 'CategoriesController@store')->name('api-add-category');
-        Route::put('/edit', 'CategoriesController@edit')->name('api-edit-category');
+        Route::post('/edit', 'CategoriesController@edit')->name('api-edit-category');
         Route::delete('/delete', 'CategoriesController@delete')->name('api-del-category');
     });
 
@@ -35,19 +35,19 @@ Route::group(['prefix' => 'events', 'middleware' => ['auth:api', 'acl']], functi
         //Tags
         Route::get('/', 'TagsController@all')->name('api-tags');
         Route::post('/create', 'TagsController@store')->name('api-add-tags');
-        Route::put('/edit', 'TagsController@edit')->name('api-edit-tags');
+        Route::post('/edit', 'TagsController@edit')->name('api-edit-tags');
         Route::delete('/delete', 'TagsController@delete')->name('api-del-tags');
     });
 
     Route::get('/', 'EventsController@all')->name('api-events');
     Route::post('/create', 'EventsController@store')->name('api-add-event');
-    Route::put('/edit', 'EventsController@save')->name('api-edit-event');
+    Route::post('/edit', 'EventsController@save')->name('api-edit-event');
     Route::delete('/delete', 'EventsController@delete')->name('api-del-event');
 });
 
 Route::group(['prefix' => 'users', 'middleware' => ['auth:api', 'acl']], function () {
     Route::get('/', 'UsersController@all')->name('api-users');
-    Route::put('/edit', 'UsersController@edit')->name('api-edit-user');
+    Route::post('/edit', 'UsersController@edit')->name('api-edit-user');
     Route::delete('/delete', 'UsersController@delete')->name('api-del-user');
     Route::post('/permissions', 'UsersController@savePermissions')->name('api-user-permission');
 });

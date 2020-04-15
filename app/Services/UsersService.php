@@ -90,8 +90,8 @@ class UsersService extends AppService
         try{
             $user_logged = Auth::user();
 
-            if ($user_logged->email == $data['email']):
-                $user = $this->model->getById($user_logged->id);
+            if ($user_logged->email == $data['email'] || $user_logged->master):
+                $user = $this->model->getById($data['id']);
                 $user->name = $data['name'];
                 $user->email = $data['email'];
                 $user->password = Hash::make($data['password']);

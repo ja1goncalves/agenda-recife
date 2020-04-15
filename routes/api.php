@@ -22,7 +22,7 @@ Route::get('/', function () {
     return redirect('/');
 });
 
-Route::group(['prefix' => 'events', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'events', 'middleware' => ['api']], function () {
 
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', 'CategoriesController@all')->name('api-categories');
@@ -45,26 +45,26 @@ Route::group(['prefix' => 'events', 'middleware' => ['auth']], function () {
     Route::delete('/delete', 'EventsController@delete')->name('api-del-event');
 });
 
-Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'users', 'middleware' => ['api']], function () {
     Route::get('/', 'UsersController@all')->name('api-users');
     Route::put('/edit', 'UsersController@edit')->name('api-edit-user');
     Route::delete('/delete', 'UsersController@delete')->name('api-del-user');
     Route::post('/permissions', 'UsersController@savePermissions')->name('api-user-permission');
 });
 
-Route::group(['prefix' => 'permissions', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'permissions', 'middleware' => ['api']], function () {
     Route::get('/', 'PermissionsController@all')->name('api-permissions');
     Route::get('/update', 'PermissionsController@refreshRoutes')->name('api-update-routes');
 });
 
-Route::group(['prefix' => 'ads', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'ads', 'middleware' => ['api']], function () {
     Route::get('/', 'AdsController@all')->name('api-ads');
     Route::post('/create', 'AdsController@store')->name('api-add-ad');
     Route::post('/edit', 'AdsController@edit')->name('api-edit-ad');
     Route::delete('/delete', 'AdsController@delete')->name('api-del-ad');
 });
 
-Route::group(['prefix' => 'reports', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'reports', 'middleware' => ['api']], function () {
     Route::get('/', 'ReportsController@all')->name('api-reports');
     Route::post('/create', 'ReportsController@store')->name('api-add-report');
 //    Route::put('/edit', 'AdsController@edit')->name('api-edit-reports');
@@ -73,5 +73,5 @@ Route::group(['prefix' => 'reports', 'middleware' => ['auth']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
     //Pictures
-    Route::get('/delete-picture', 'PicturesController@delete')->name('api-del-img');
+    Route::delete('/delete-picture', 'PicturesController@delete')->name('api-del-img');
 });

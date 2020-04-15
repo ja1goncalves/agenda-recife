@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth', 'acl']], function() {
     Route::get('/home', 'HomeController@index')->name('home');
 
     //Events

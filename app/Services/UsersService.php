@@ -65,18 +65,18 @@ class UsersService extends AppService
         endforeach;
     }
 
-    public function updatePermissions(array $permissions)
+    public function updatePermissions(array $data)
     {
         try {
-            unset($permissions['_token']);
-            foreach ($permissions as $key => $permission):
-                $user_permission = $this->permission->getById(preg_replace('/\D/', '', $key));
-                $this->permission->edit($user_permission->id, ['auth' => $permission == "on"]);
+            UserPermission::where('user_id', '=', $data['user_id'])->update(['auth' => false]);
+            foreach ($data['permissions'] as $id => $om):
+                $user_permission = $this->permission->getById(preg_replace('/\D/', '', $id));
+                $this->permission->edit($user_permission->id, ['auth' => $om == "on"]);
             endforeach;
 
             return $this->returnSuccess([], 'All permissions was updated');
         } catch (\Exception $e) {
-            return $this->returnError($permissions, $e->getMessage());
+            return $this->returnError($data, $e->getMessage());
         }
     }
 

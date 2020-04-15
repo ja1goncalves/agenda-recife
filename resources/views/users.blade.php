@@ -119,10 +119,11 @@
                                                             <form method="POST" action="{{ route('user-permission') }}" enctype="multipart/form-data">
                                                                 @csrf
                                                                 <div class="modal-body text-center col-md-12 row">
+                                                                    <input type="hidden" name="user_id" value="{{$user->id}}">
                                                                     @foreach($user->userPermissions as $permission)
                                                                     <div class="form-group col-md-4">
                                                                         <div class="custom-control custom-checkbox text-left">
-                                                                            <input type="checkbox" name="permission-{{$permission->id}}" {{$permission->permission->inactive ? 'disabled' : ''}} class="custom-control-input" id="permission-check-{{$permission->id}}" {{$permission->auth ? 'checked' : ''}}>
+                                                                            <input type="checkbox" name="permissions[{{$permission->id}}]" {{$permission->permission->inactive ? 'disabled' : ''}} class="custom-control-input" id="permission-check-{{$permission->id}}" {{$permission->auth ? 'checked' : ''}}>
                                                                             <label class="custom-control-label" for="permission-check-{{$permission->id}}"> {{$permission->permission ? $permission->permission->route : '?'}}</label>
                                                                         </div>
                                                                     </div>

@@ -27,10 +27,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        $permissions = Permission::with('users')->get();
+        $permissions = Permission::with('userPermission')->get();
         foreach ($permissions as $permission):
             Gate::define($permission->route, function (User $user) use ($permission){
-                return !(array_search($user->id, array_column($permission->users->toArray(), 'id')) === false) && !$permission->inactive;
+                $user_permission = $user->userPermissions()
+                    ->where('user_id', '=', $user->id)
+                    ->where('permission_id', '=', $permission->id)
+                    ->first();
+                return $user_permission->auth && !$permission->inactive;
             });
         endforeach;
     }

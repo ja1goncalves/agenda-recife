@@ -2,10 +2,12 @@
 
 namespace App\Model;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 
 class User extends Authenticatable
 {
@@ -74,6 +76,28 @@ class User extends Authenticatable
     public function add(Array $data)
     {
         return User::create($data);
+    }
+
+    public function findWhere(array $wheres, $finish = false, $columns = ['*'])
+    {
+        $query = self::query();
+        foreach ($wheres as $key => $value):
+            if (is_array($value) && count($value) >= 3):
+                $query->where($value[0], $value[1], $value[2]);
+            else:
+                if(Schema::hasColumn($this->table, $key)):
+                    if (strtotime($value) !== false):
+                        $date_start = Carbon::createFromFormat('Y-m-d', $value)->format('Y-m-d 00:00:00');
+                        $date_end = Carbon::createFromFormat('Y-m-d', $value)->format('Y-m-d 23:59:59');
+                        $query->whereBetween($key, [$date_start, $date_end]);
+                    else:
+                        $query->where($key, '=', $value);
+                    endif;
+                endif;
+            endif;
+        endforeach;
+
+        return $finish ? $query->get($columns) : $query;
     }
 
     public function edit($id, $data)

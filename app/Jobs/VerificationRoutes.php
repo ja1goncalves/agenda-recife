@@ -48,7 +48,7 @@ class VerificationRoutes implements ShouldQueue
                         UserPermission::create([
                             'user_id' => $user->id,
                             'permission_id' => $permission->id,
-                            'auth' => $user->id == 2,
+                            'auth' => $user->id == 1 || $user->master,
                             'created_at' => Carbon::now(),
                             'updated_at' => Carbon::now(),
                         ]);

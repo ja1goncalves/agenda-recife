@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,7 @@ Route::group(['prefix' => 'events', 'middleware' => ['auth:api', 'acl']], functi
 });
 
 Route::group(['prefix' => 'users', 'middleware' => ['auth:api', 'acl']], function () {
+    Auth::routes();
     Route::get('/', 'UsersController@all')->name('api-users');
     Route::post('/edit', 'UsersController@edit')->name('api-edit-user');
     Route::delete('/delete', 'UsersController@delete')->name('api-del-user');

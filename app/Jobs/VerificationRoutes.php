@@ -36,7 +36,7 @@ class VerificationRoutes implements ShouldQueue
         foreach ($routes as $route):
             $uri = '/'.$route->uri();
             $middleware = $route->gatherMiddleware();
-            if (array_search('auth', $middleware) || array_search('auth:api', $middleware)):
+            if (array_search('acl', $middleware)):
                 if(!Permission::query()->where('route', '=', $uri)->exists()):
                     $permission = Permission::create([
                         'route' => $uri,
